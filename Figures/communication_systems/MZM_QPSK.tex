@@ -1,0 +1,21 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% author                : louis tomczyk
+% date of production    : 2024-02-11
+% licence               : cc-by-nc-sa
+%                         Attribution - Non-Commercial - Share Alike 4.0 International
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{tikzpicture}
+
+\draw (-2,0) --++ (1,0);
+\draw (8,0) --++ (1,0);
+\MZM{0}{1.5}{1}{black}
+\MZMpi{0}{-1.5}{black}
+\VoltBox{2.5}{1}{_{I}}{black}
+\VoltBox{2.5}{-2}{_{Q}}{black}
+\draw[black,thick] (-1,0) --++ (1,1.5) --++ (-1,-1.5) --++ (1,-1.5);
+\draw[black,thick] (7,1.5) --++ (1,-1.5) --++ (-1,-1.5);
+
+\constQPSK{10}{2}{1}{0.1}{black}
+
+\end{tikzpicture}

@@ -1,0 +1,38 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% author                : louis tomczyk
+% date of production    : 2024-12-05
+% licence               : cc-by-nc-sa
+%                         Attribution - Non-Commercial - Share Alike 4.0 International
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{tikzpicture}[scale=1]
+    \pgfmathsetmacro{\spacingX}{0.2}     % Pas du réseau en X
+    \pgfmathsetmacro{\spacingY}{0.2}     % Pas du réseau en Y
+    \pgfmathsetmacro{\rectWidth}{0.05}   % Largeur des fentes
+    \pgfmathsetmacro{\rectHeight}{0.05}  % Hauteur des fentes
+    \pgfmathsetmacro{\angleRot}{15}       % Angle de rotation
+    \pgfmathsetmacro{\nSlitsX}{5}        % Nombre de fentes en X
+    \pgfmathsetmacro{\nSlitsY}{5}        % Nombre de fentes en Y
+
+    % Calcul du centre pour la rotation
+    \pgfmathsetmacro{\xmin}{0} % Coordonnée minimale en X
+    \pgfmathsetmacro{\ymin}{0} % Coordonnée minimale en Y
+    \pgfmathsetmacro{\xmax}{\nSlitsX * \spacingX}
+    \pgfmathsetmacro{\ymax}{\nSlitsY * \spacingY}
+    \pgfmathsetmacro{\xcenter}{\xmax/2}
+    \pgfmathsetmacro{\ycenter}{\ymax/2}
+
+    % Appliquer la rotation
+    \begin{scope}[rotate=\angleRot,shift={(\xcenter,\ycenter)}]
+        \foreach \i in {0,...,\nSlitsX}{ % Boucle pour les colonnes
+            \foreach \j in {0,...,\nSlitsY}{ % Boucle pour les lignes
+                \pgfmathsetmacro{\x}{\xmin + \i * \spacingX}
+                \pgfmathsetmacro{\y}{\ymin + \j * \spacingY}
+                \draw[fill=black] 
+                    (\x-\xcenter-\rectWidth/2, \y-\ycenter-\rectHeight/2) 
+                    rectangle ++(\rectWidth, \rectHeight);
+            }
+        }
+    \end{scope}
+\end{tikzpicture}
+

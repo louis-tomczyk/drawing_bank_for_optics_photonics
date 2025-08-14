@@ -1,0 +1,36 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% author                : louis tomczyk
+% date of production    : 2024-02-11
+% licence               : cc-by-nc-sa
+%                         Attribution - Non-Commercial - Share Alike 4.0 International
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{tikzpicture}
+
+\PBS{-1}{-0.5}{1}
+\draw[black,thick] (-2,0) --++ (1,0);
+\draw[blue,thick] (-0.5,0.5) --++ (0,2.5) --++ (0.5,0);
+\draw[red,thick] (-0.5,-0.5) --++ (0,-2.5) --++ (0.5,0);
+
+\MZM{1}{4.5}{1}{blue}
+\MZMpi{1}{1.5}{blue}
+\VoltBox{3.5}{4}{_{HI}}{blue}
+\VoltBox{3.5}{1}{_{HQ}}{blue}
+\draw[blue,thick] (0,3) --++ (1,1.5) --++ (-1,-1.5) --++ (1,-1.5);
+\draw[blue,thick] (8,4.5) --++ (1,-1.5) --++ (-1,-1.5);
+
+\MZM{1}{-1.5}{1}{orange}
+\MZMpi{1}{-4.5}{orange}
+\VoltBox{3.5}{-2}{_{VI}}{orange}
+\VoltBox{3.5}{-5}{_{VQ}}{orange}
+\draw[orange,thick] (0,-3) --++ (1,1.5) --++ (-1,-1.5) --++ (1,-1.5);
+\draw[orange,thick] (8,-1.5) --++ (1,-1.5) --++ (-1,-1.5);
+
+\PBS{9}{-0.5}{1}
+\draw[black,thick] (10,0) --++ (1,0);
+\draw[blue,thick] (9,3) --++ (0.5,0) --++ (0,-2.5);
+\draw[orange,thick] (9,-3) --++ (0.5,0) --++ (0,2.5);
+
+\constQPSK{10}{5}{1}{0.1}{blue}
+\constQPSK{10}{-5}{1}{0.1}{orange}
+\end{tikzpicture}

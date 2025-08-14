@@ -1,0 +1,32 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% author                : louis tomczyk
+% date of production    : 2024-12-05
+% licence               : cc-by-nc-sa
+%                         Attribution - Non-Commercial - Share Alike 4.0 International
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{tikzpicture}[scale=1]
+    \pgfmathsetmacro{\minRadius}{0.2}     % Rayon du cercle le plus petit
+    \pgfmathsetmacro{\maxRadius}{1.0}     % Rayon du cercle le plus grand
+    \pgfmathsetmacro{\nCircles}{5}        % Nombre de cercles concentriques
+    \pgfmathsetmacro{\angleStep}{30}      % Espacement angulaire (en degrés)
+    \pgfmathsetmacro{\pointRadius}{0.02} % Rayon des points
+
+    % Boucle pour les cercles concentriques
+    \foreach \circleIndex in {1,...,\nCircles} {
+        \pgfmathsetmacro{\currentRadius}{\minRadius + (\circleIndex-1) * (\maxRadius - \minRadius) / (\nCircles-1)}
+        % Boucle pour les points sur le cercle actuel
+        \foreach \angle in {0,\angleStep,...,359} {
+            % Calcul des coordonnées polaires
+            \pgfmathsetmacro{\x}{\currentRadius * cos(\angle)}
+            \pgfmathsetmacro{\y}{\currentRadius * sin(\angle)}
+            % Dessiner le point
+            \fill[black] (\x, \y) circle (\pointRadius);
+        }
+    }
+
+
+
+\end{tikzpicture}
+
