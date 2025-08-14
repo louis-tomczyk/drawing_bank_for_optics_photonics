@@ -1,0 +1,63 @@
+\begin{tikzpicture}
+    \draw[very thin] (0,-2.8) -- (0,2.8);
+    
+    \foreach \y in {-3,-2,-1,0,1,2} {
+    \draw[->] (-4,\y) -- (0,\y+0.5);
+    }
+    
+    \foreach \y in {-2.5,-1.5,-0.5,0.5,1.5,2.5} {
+    \draw[->] (0,\y) -- (4,\y+2);
+    }
+    
+    \draw[dash dot] (-2,-0.5) --++ (2,0);
+    \draw[dash dot] (0,0.5) --++ (2,0);
+    
+    \draw[fill=blue, color=blue] (0,-0.5) coordinate (a1) circle (1pt) 
+    								node[above left=0.05cm and 0.1cm] {$A_1$};
+    \draw[fill=blue, color=blue] (-0.13,0.475) coordinate (a2) circle (1pt) 
+    								node[above left=0.05cm and 0.1cm] {$A_2$};
+    								
+	\draw[fill=blue, color=blue] (0,0.5) coordinate (a4) circle (1pt)
+									node[above right = 3pt and 0.5pt] {$A_4$};
+									
+	\draw[fill=blue, color=blue] (0.4,-0.29) coordinate (a3) circle (1pt)
+									node[below right = 0.5pt and 0.5pt] {$A_3$};
+
+
+    \node (A1)  at (0,-0.5) {};
+    \node (A2)  at (-0.13,0.475) {};
+    \node (A3)  at (0.4,-0.29) {};
+    \node (A4)  at (0,0.5) {};
+    
+    \draw[ultra thick, blue] (A2.center) -- (A4.center);
+    \draw[ultra thick, blue] (A1.center) -- (A3.center);
+
+    \draw (-0.25,3.5) node[blue]{$\delta = A_2A_4+A_1A_3$};
+
+    
+    % Normale à la surface (au point A)
+    \draw[<->,thick] (0.5,1.5) -- ++(0,1) node[midway, left] {$a$};
+    \draw[dotted] (0,1.5) -- ++(0.5,0);
+    \draw[dotted] (0,2.5) -- ++(0.5,0);
+    
+    % Indice n_air
+    \node at (-3.8,2.2) {$n_1$};
+    \node at (1.4,2.4) {$n_2$};
+    
+    % Point à l'infini
+    \node[right] at (3.1,2.6) {$M_\infty$};
+    \node[left] at (-3,0.3) {$S_\infty$};
+    
+    % Plans d’équiphase
+    \draw[dashed,gray] (-0.25,1.5)node[left=7pt,above = 4pt,gray] {$(\pi)$} --++ (0.25,-2);
+    \draw[dashed,black] (0,0.5) --++ (0.75,-1.5) node[right=4pt,below = 4pt,black] {$(\pi')$};
+    
+    % Angles theta_i et theta_r
+    \draw[<-,thick] (-2,-0.75) arc[start angle=180,end angle=165,radius=1cm];
+    \node at (-2.2,-0.6) {$\theta_i$};
+    
+    \draw[->,thick] (2,0.5) arc[start angle=0,end angle=54,radius=1cm];
+    \node at (2.1,1) {$\theta_r$};
+    
+\end{tikzpicture}
+

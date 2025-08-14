@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+    
+    \draw[dashed,rounded corners] (5,-0.625) rectangle (9,0.625)node[midway, above = 10pt]{classic DSP};
+    \draw[dashed,rounded corners, color = redTelecom] (5,-2.125) rectangle (9,-0.875)node[midway, below = 10pt]{C-PPE};
+    \boxvaluesmaller{0}{0}{ TX}{grayTelecom}
+    \linkright{0.75}{0}{4.5}{}{black}
+    \linkright{6.75}{0}{.5}{}{black}
+    \linkright{6.75}{-1.5}{.5}{}{black}
+    \linkdown{6}{-.5}{.5}{}{black}
+    \linkdown{8}{-.5}{.5}{}{black}
+    \FIBRE{4}{0}{0}{}
+    \boxvaluesmaller{6}{0}{CDC}{grayTelecom}
+    \boxvaluesmaller{8}{0}{}{grayTelecom}
+    \draw (8,0.175) node{\tiny remaining};
+    \draw (8,-0.175) node{\tiny DSP steps};
+    \boxvaluesmaller{6}{-1.5}{ \Emph{PNR}}{redTelecom}
+    \boxvaluesmaller{8}{-1.5}{ \Emph{xcorr}}{redTelecom}
+
+    \boxvalueopaque{1.5}{-.5}{1.5}{1}{grayTelecom}{DPD}
+\end{tikzpicture}

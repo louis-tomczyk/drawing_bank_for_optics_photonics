@@ -1,0 +1,88 @@
+\begin{tikzpicture}[scale = 1.125]
+    \draw[ultra thick] (-7,0) --++ (7,0);
+    \FIBRE{-6}{0}{0}{}
+    \EDFA{-5}{0}{0}{}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%% DEMULTIPLEXEUR %%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    % Ligne 1 : Rouge
+    \draw[rounded corners=5pt, thick, draw=red] (-4,0) --++ (0.25,1) --++ (1.25,0);
+    \draw[dashed, rounded corners=5pt, thick, draw=red] (-2.65,1.1) --++ (0.6,0.4);
+    
+    % Ligne 2 : Orange
+    \draw[rounded corners=5pt, thick, draw=orange] (-4,0) --++ (0.25,0.75) --++ (1.25,0);
+    \draw[dashed, rounded corners=5pt, thick, draw=orange] (-2.6,0.85) --++ (0.6,0.3);
+    
+    % Ligne 3 : Jaune
+    \draw[rounded corners=5pt, thick, draw=yellow] (-4,0) --++ (0.25,0.5) --++ (1.25,0);
+    \draw[dashed, rounded corners=5pt, thick, draw=yellow] (-2.55,0.6) --++ (0.6,0.2);
+    
+    % Ligne 4 : Vert
+    \draw[rounded corners=5pt, thick, draw=green] (-4,0) --++ (0.25,0.25) --++ (1.25,0);
+    \draw[dashed, rounded corners=5pt, thick, draw=green] (-2.5,0.35) --++ (0.6,0.1);
+    
+    % Ligne 5 : Bleu clair
+    \draw[rounded corners=5pt, thick, draw=cyan] (-4,0) --++ (0.25,-0.25) --++ (1.25,0);
+    \draw[dashed, rounded corners=5pt, thick, draw=cyan] (-2.5,-0.35) --++ (0.6,-.1);
+    
+    % Ligne 6 : Bleu
+    \draw[rounded corners=5pt, thick, draw=blue] (-4,0) --++ (0.25,-0.5) --++ (1.25,0);
+    \draw[dashed, rounded corners=5pt, thick, draw=blue] (-2.55,-0.6) --++ (0.6,-0.2);
+    
+    % Ligne 7 : Violet
+    \draw[rounded corners=5pt, thick, draw=purple] (-4,0) --++ (0.25,-0.75) --++ (1.25,0);
+    \draw[dashed, rounded corners=5pt, thick, draw=purple] (-2.6,-0.85) --++ (0.6,-0.3);
+    
+    % Ligne 8 : Bleu foncé
+    \draw[rounded corners=5pt, thick, draw=purple!50!black] (-4,0) --++ (0.25,-1) --++ (1.25,0);
+    \draw[dashed, rounded corners=5pt, thick, draw=purple!50!black] (-2.65,-1.1) --++ (0.6,-0.4);
+
+    \draw[fill = white] (-3,-1) --++ (0,2) --++ (0.5,0.5) --++ (0,-3) --++ (-0.5,0.5) -- cycle;
+    \draw (-2.75,0) node[rotate = -90]{\small démultiplexeur};
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%% POLARISATION CONTROLLER %%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %\draw (-1.5,0.25) circle (0.25);
+    %\draw (-1,0.25) circle (0.25) node[above = 5pt]{PC};
+    %\draw (-.5,0.25) circle (0.25);
+
+    \laserSize{-0.75}{-2}{black}{0.5}{}
+
+    \draw[dashed,rounded corners = 2pt] (-7,1.5) --++ (1.75,0)node[above left = 2mm]{\Large $\substack{\text{canal} \\ \text{(optique)}}$} --++ (0,-3) --++ (-1.75,0);
+
+    \draw[rounded corners = 5pt, ultra thick] (0,0)node[above right]{signal} --++ (1,0) --++ (0.5,0) --++ (0,.5) --++ (1.25,0);
+    \draw[rounded corners = 5pt, ultra thick] (0,0) --++ (1,0) --++ (1.55,0) --++ (0,-1) --++ (0.2,0);
+    \PBS{2.5}{-0.5}{0.5}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%% RECEPTEUR À DIVERSITÉ DE POLAR %%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    \draw[rounded corners = 5pt] (0,-1)node[above right]{LO} --++ (1,0) --++ (1,0) --++ (0,1.5) --++ (0.125,0);
+    \draw[rounded corners = 5pt] (0,-1) --++ (2.5,0) --++ (0.125,0);
+    \PBS{3.5}{-2.5}{0.5}
+
+    \draw (2.75,0) rectangle (3.75,1) node[midway]{$\substack{\text{hybride} \\ 90}$};
+    \draw (2.75,-1.5) rectangle (3.75,-0.5) node[midway]{$\substack{\text{hybride} \\ 90}$};
+
+    \draw [->] (3.75,0.75) --++ (0.5,0);
+    \draw [->] (3.75,0.25) --++ (0.5,0);
+
+    \draw [->] (3.75,-0.75) --++ (0.5,0);
+    \draw [->] (3.75,-1.25) --++ (0.5,0);
+
+    \draw (4.25,0.5) rectangle (5.25,1) node[midway]{\small BPD};
+    \draw (4.25,0) rectangle (5.25,0.5) node[midway]{\small BPD};
+    \draw (4.25,-0.5) rectangle (5.25,-1) node[midway]{\small BPD};
+    \draw (4.25,-1) rectangle (5.25,-1.5) node[midway]{\small BPD};
+
+    \draw [->] (5.25,0.75) --++ (0.5,0) node[right]{$\imath_{HI}$};
+    \draw [->] (5.25,0.25) --++ (0.5,0) node[right]{$\imath_{HQ}$};
+
+    \draw [->] (5.25,-0.75) --++ (0.5,0) node[right]{$\imath_{VI}$};
+    \draw [->] (5.25,-1.25) --++ (0.5,0) node[right]{$\imath_{VQ}$};
+
+\end{tikzpicture}

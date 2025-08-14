@@ -1,0 +1,41 @@
+\begin{tikzpicture}[
+    node distance=1.25cm,
+    auto,
+    block/.style={
+      rectangle,
+      draw,
+      text width=2.5cm,
+      align=center,
+      minimum height=1cm
+    },
+]
+
+% Noeuds principaux
+\node[block] (import) {1. importation de données};
+\node[block, below of=import] (analysis) {2. analyse};
+\node[block, below of=analysis] (preproc) {3. pré-traitement};
+\node[block, below of=preproc] (training) {4. entraînement};
+\node[block, below of=training] (eval) {5. évaluation};
+
+% Paramètres et modèle, sur la gauche
+\node[block, left=1.5cm of preproc] (hyper) {hyper-paramètres};
+\node[block, below of=hyper] (model) {modèle};
+
+% Flèches du flux principal
+\draw[->] (import) -- (analysis);
+\draw[->] (analysis) -- (preproc);
+\draw[->] (preproc) -- (training);
+\draw[->] (training) -- (eval);
+
+% Flèches pour les hyper-paramètres et le modèle
+\draw[thick,->] (hyper) -- (model);
+\draw[thick,->] (model) -- (training);
+\draw[thick, <->] (hyper) to node[midway,above,sloped]{\scriptsize 4'. optimisation}
+					(training);
+
+% Flèche en pointillés pour la correction des erreurs
+\draw[->,dashed] (eval.east) --++ (0.25,0) --++ (0,3) 
+		node[midway,right,text width=2cm]
+    	{correction des erreurs dans le jeu de données} --++ (-0.25,0);
+\end{tikzpicture}
+

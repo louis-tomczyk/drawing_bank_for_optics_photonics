@@ -1,0 +1,552 @@
+% ------------------------------------------------------------------------------
+% ----- INFORMATIONS -----
+%   Author          : louis tomczyk
+%   Institution     : Telecom Paris
+%   Email           : louis.tomczyk@telecom-paris.fr
+%   Arxivs          : 2024-04-06
+%                   : 2024-05-27 (1.2.0) (vec)frak
+%                   : 2024-05-30 (1.3.0) vec
+%                   : 2025-03-03 (1.4.0) bf
+%                   : 2025-03-03 (1.5.0) bff
+%                   : 2025-03-25 (1.6.0) veca/b/...
+%   Date            : 2025-04-13 (1.7.0) don't remove the double brakets: enables sub/superscript
+%   Version         : 1.7.0
+%   License         : cc-by-nc-sa
+%                       CAN:    modify - distribute
+%                       CANNOT: commercial use
+%                       MUST:   share alike - include license
+% ------------------------------------------------------------------------------
+
+\newcommand{\imaths}{\text{\textit{\fontspec{TeX Gyre Termes}\i}}}
+
+\def \A{\mathbb{A}}
+\def \B{\mathbb{B}}
+\def \C{\mathbb{C}}
+\def \D{\mathbb{D}}
+\def \E{\mathbb{E}}
+\def \F{\mathbb{F}}
+\def \G{\mathbb{G}}
+\def \H{\mathbb{H}}
+\def \I{\mathbb{I}}
+\def \J{\mathbb{J}}
+\def \K{\mathbb{K}}
+\def \L{\mathbb{L}}
+\def \M{\mathbb{M}}
+\def \N{\mathbb{N}}
+\def \O{\mathbb{O}}
+\def \P{\mathbb{P}}
+\def \Q{\mathbb{Q}}
+\def \R{\mathbb{R}}
+\def \S{\mathbb{S}}
+\def \T{\mathbb{T}}
+\def \U{\mathbb{U}}
+\def \V{\mathbb{V}}
+\def \W{\mathbb{W}}
+\def \X{\mathbb{X}}
+\def \Y{\mathbb{Y}}
+\def \Z{\mathbb{Z}}
+
+
+\def \Ahat{\hat{A}}
+\def \Bhat{\hat{B}}
+\def \Chat{\hat{C}}
+\def \Dhat{\hat{D}}
+\def \Ehat{\hat{E}}
+\def \Fhat{\hat{F}}
+\def \Ghat{\hat{G}}
+\def \Hhat{\hat{H}}
+\def \Ihat{\hat{I}}
+\def \Jhat{\hat{J}}
+\def \Khat{\hat{K}}
+\def \Lhat{\hat{L}}
+\def \Mhat{\hat{M}}
+\def \Nhat{\hat{N}}
+\def \Ohat{\hat{O}}
+\def \Phat{\hat{P}}
+\def \Qhat{\hat{Q}}
+\def \Rhat{\hat{R}}
+\def \Shat{\hat{S}}
+\def \That{\hat{T}}
+\def \Uhat{\hat{U}}
+\def \Vhat{\hat{V}}
+\def \What{\hat{W}}
+\def \Xhat{\hat{X}}
+\def \Yhat{\hat{Y}}
+\def \Zhat{\hat{Z}}
+
+
+\def \calA{\mathcal{A}}
+\def \calB{\mathcal{B}}
+\def \calC{\mathcal{C}}
+\def \calD{\mathcal{D}}
+\def \calE{\mathcal{E}}
+\def \calF{\mathcal{F}}
+\def \calG{\mathcal{G}}
+\def \calH{\mathcal{H}}
+\def \calI{\mathcal{I}}
+\def \calJ{\mathcal{J}}
+\def \calK{\mathcal{K}}
+\def \calL{\mathcal{L}}
+\def \calM{\mathcal{M}}
+\def \calN{\mathcal{N}}
+\def \calO{\mathcal{O}}
+\def \calP{\mathcal{P}}
+\def \calQ{\mathcal{Q}}
+\def \calR{\mathcal{R}}
+\def \calS{\mathcal{S}}
+\def \calT{\mathcal{T}}
+\def \calU{\mathcal{U}}
+\def \calV{\mathcal{V}}
+\def \calW{\mathcal{W}}
+\def \calX{\mathcal{X}}
+\def \calY{\mathcal{Y}}
+\def \calZ{\mathcal{Z}}
+
+\def \veccalA{\vec{\mathcal{A}}}
+\def \veccalB{\vec{\mathcal{B}}}
+\def \veccalC{\vec{\mathcal{C}}}
+\def \veccalD{\vec{\mathcal{D}}}
+\def \veccalE{\vec{\mathcal{E}}}
+\def \veccalF{\vec{\mathcal{F}}}
+\def \veccalG{\vec{\mathcal{G}}}
+\def \veccalH{\vec{\mathcal{H}}}
+\def \veccalI{\vec{\mathcal{I}}}
+\def \veccalJ{\vec{\mathcal{J}}}
+\def \veccalK{\vec{\mathcal{K}}}
+\def \veccalL{\vec{\mathcal{L}}}
+\def \veccalM{\vec{\mathcal{M}}}
+\def \veccalN{\vec{\mathcal{N}}}
+\def \veccalO{\vec{\mathcal{O}}}
+\def \veccalP{\vec{\mathcal{P}}}
+\def \veccalQ{\vec{\mathcal{Q}}}
+\def \veccalR{\vec{\mathcal{R}}}
+\def \veccalS{\vec{\mathcal{S}}}
+\def \veccalT{\vec{\mathcal{T}}}
+\def \veccalU{\vec{\mathcal{U}}}
+\def \veccalV{\vec{\mathcal{V}}}
+\def \veccalW{\vec{\mathcal{W}}}
+\def \veccalX{\vec{\mathcal{X}}}
+\def \veccalY{\vec{\mathcal{Y}}}
+\def \veccalZ{\vec{\mathcal{Z}}}
+
+\def \vecA{{\vec{A}}}
+\def \vecB{{\vec{B}}}
+\def \vecC{{\vec{C}}}
+\def \vecD{{\vec{D}}}
+\def \vecE{{\vec{E}}}
+\def \vecF{{\vec{F}}}
+\def \vecG{{\vec{G}}}
+\def \vecH{{\vec{H}}}
+\def \vecI{{\vec{I}}}
+\def \vecJ{{\vec{J}}}
+\def \vecK{{\vec{K}}}
+\def \vecL{{\vec{L}}}
+\def \vecM{{\vec{M}}}
+\def \vecN{{\vec{N}}}
+\def \vecO{{\vec{O}}}
+\def \vecP{{\vec{P}}}
+\def \vecQ{{\vec{Q}}}
+\def \vecR{{\vec{R}}}
+\def \vecS{{\vec{S}}}
+\def \vecT{{\vec{T}}}
+\def \vecU{{\vec{U}}}
+\def \vecV{{\vec{V}}}
+\def \vecW{{\vec{W}}}
+\def \vecX{{\vec{X}}}
+\def \vecY{{\vec{Y}}}
+\def \vecZ{{\vec{Z}}}
+
+\def \veca{{\vec{a}}}
+\def \vecb{{\vec{b}}}
+\def \vecc{{\vec{c}}}
+\def \vecd{{\vec{d}}}
+\def \vece{{\vec{e}}}
+\def \vecf{{\vec{f}}}
+\def \vecg{{\vec{g}}}
+\def \vech{{\vec{h}}}
+\def \veci{{\vec{i}}}
+\def \vecj{{\vec{j}}}
+\def \veck{{\vec{k}}}
+\def \vecl{{\vec{l}}}
+\def \vecm{{\vec{m}}}
+\def \vecn{{\vec{n}}}
+\def \veco{{\vec{o}}}
+\def \vecp{{\vec{p}}}
+\def \vecq{{\vec{q}}}
+\def \vecr{{\vec{r}}}
+\def \vecs{{\vec{s}}}
+\def \vect{{\vec{t}}}
+\def \vecu{{\vec{u}}}
+\def \vecv{{\vec{v}}}
+\def \vecw{{\vec{w}}}
+\def \vecx{{\vec{x}}}
+\def \vecy{{\vec{y}}}
+\def \vecz{{\vec{z}}}
+
+
+\def \vecalpha{\vec{\alpha}}
+\def \vecbeta{\vec{\beta}}
+\def \vecgamma{\vec{\gamma}}
+\def \vecdelta{\vec{\delta}}
+\def \vecepsilon{\vec{\epsilon}}
+\def \veczeta{\vec{\zeta}}
+\def \veceta{\vec{\eta}}
+\def \vectheta{\vec{\theta}}
+\def \veciota{\vec{\iota}}
+\def \veckappa{\vec{\kappa}}
+\def \veclambda{\vec{\lambda}}
+\def \vecmu{\vec{\mu}}
+\def \vecnu{\vec{\nu}}
+\def \vecxi{\vec{\xi}}
+\def \vecpi{\vec{\pi}}
+\def \vecrho{\vec{\rho}}
+\def \vecsigma{\vec{\sigma}}
+\def \vectau{\vec{\tau}}
+\def \vecupsilon{\vec{\upsilon}}
+\def \vecphi{\vec{\phi}}
+\def \vecchi{\vec{\chi}}
+\def \vecpsi{\vec{\psi}}
+\def \vectomega{\vec{\omega}}
+
+\def \vecGamma{\vec{\Gamma}}
+\def \vecDelta{\vec{\Delta}}
+\def \vecTheta{\vec{\Theta}}
+\def \vecLambda{\vec{\Lambda}}
+\def \vecXi{\vec{\Xi}}
+\def \vecPi{\vec{\Pi}}
+\def \vecSigma{\vec{\Sigma}}
+\def \vecUpsilon{\vec{\Upsilon}}
+\def \vecPhi{\vec{\Phi}}
+\def \vecPsi{\vec{\Psi}}
+\def \vecOmega{\vec{\Omega}}
+
+
+
+\def \frakA{\mathfrak{A}}
+\def \frakB{\mathfrak{B}}
+\def \frakC{\mathfrak{C}}
+\def \frakD{\mathfrak{D}}
+\def \frakE{\mathfrak{E}}
+\def \frakF{\mathfrak{F}}
+\def \frakG{\mathfrak{G}}
+\def \frakH{\mathfrak{H}}
+\def \frakI{\mathfrak{I}}
+\def \frakJ{\mathfrak{J}}
+\def \frakK{\mathfrak{K}}
+\def \frakL{\mathfrak{L}}
+\def \frakM{\mathfrak{M}}
+\def \frakN{\mathfrak{N}}
+\def \frakO{\mathfrak{O}}
+\def \frakP{\mathfrak{P}}
+\def \frakQ{\mathfrak{Q}}
+\def \frakR{\mathfrak{R}}
+\def \frakS{\mathfrak{S}}
+\def \frakT{\mathfrak{T}}
+\def \frakU{\mathfrak{U}}
+\def \frakV{\mathfrak{V}}
+\def \frakW{\mathfrak{W}}
+\def \frakX{\mathfrak{X}}
+\def \frakY{\mathfrak{Y}}
+\def \frakZ{\mathfrak{Z}}
+
+\def \vecfrakA{\bm{\mathfrak{A}}}
+\def \vecfrakB{\bm{\mathfrak{B}}}
+\def \vecfrakC{\bm{\mathfrak{C}}}
+\def \vecfrakD{\bm{\mathfrak{D}}}
+\def \vecfrakE{\bm{\mathfrak{E}}}
+\def \vecfrakF{\bm{\mathfrak{F}}}
+\def \vecfrakG{\bm{\mathfrak{G}}}
+\def \vecfrakH{\bm{\mathfrak{H}}}
+\def \vecfrakI{\bm{\mathfrak{I}}}
+\def \vecfrakJ{\bm{\mathfrak{J}}}
+\def \vecfrakK{\bm{\mathfrak{K}}}
+\def \vecfrakL{\bm{\mathfrak{L}}}
+\def \vecfrakM{\bm{\mathfrak{M}}}
+\def \vecfrakN{\bm{\mathfrak{N}}}
+\def \vecfrakO{\bm{\mathfrak{O}}}
+\def \vecfrakP{\bm{\mathfrak{P}}}
+\def \vecfrakQ{\bm{\mathfrak{Q}}}
+\def \vecfrakR{\bm{\mathfrak{R}}}
+\def \vecfrakS{\bm{\mathfrak{S}}}
+\def \vecfrakT{\bm{\mathfrak{T}}}
+\def \vecfrakU{\bm{\mathfrak{U}}}
+\def \vecfrakV{\bm{\mathfrak{V}}}
+\def \vecfrakW{\bm{\mathfrak{W}}}
+\def \vecfrakX{\bm{\mathfrak{X}}}
+\def \vecfrakY{\bm{\mathfrak{Y}}}
+\def \vecfrakZ{\bm{\mathfrak{Z}}}
+
+
+\def \Atilde{\tilde{A}}
+\def \Btilde{\tilde{B}}
+\def \Ctilde{\tilde{C}}
+\def \Dtilde{\tilde{D}}
+\def \Etilde{\tilde{E}}
+\def \Ftilde{\tilde{F}}
+\def \Gtilde{\tilde{G}}
+\def \Htilde{\tilde{H}}
+\def \Itilde{\tilde{I}}
+\def \Jtilde{\tilde{J}}
+\def \Ktilde{\tilde{K}}
+\def \Ltilde{\tilde{L}}
+\def \Mtilde{\tilde{M}}
+\def \Ntilde{\tilde{N}}
+\def \Otilde{\tilde{O}}
+\def \Ptilde{\tilde{P}}
+\def \Qtilde{\tilde{Q}}
+\def \Rtilde{\tilde{R}}
+\def \Stilde{\tilde{S}}
+\def \Ttilde{\tilde{T}}
+\def \Utilde{\tilde{U}}
+\def \Vtilde{\tilde{V}}
+\def \Wtilde{\tilde{W}}
+\def \Xtilde{\tilde{X}}
+\def \Ytilde{\tilde{Y}}
+\def \Ztilde{\tilde{Z}}
+
+\def \atilde{\tilde{a}}
+\def \btilde{\tilde{b}}
+\def \ctilde{\tilde{c}}
+\def \dtilde{\tilde{d}}
+\def \etilde{\tilde{e}}
+\def \ftilde{\tilde{f}}
+\def \gtilde{\tilde{g}}
+\def \htilde{\tilde{h}}
+\def \itilde{\tilde{i}}
+\def \jtilde{\tilde{j}}
+\def \ktilde{\tilde{k}}
+\def \ltilde{\tilde{l}}
+\def \mtilde{\tilde{m}}
+\def \ntilde{\tilde{n}}
+\def \otilde{\tilde{o}}
+\def \ptilde{\tilde{p}}
+\def \qtilde{\tilde{q}}
+\def \rtilde{\tilde{r}}
+\def \stilde{\tilde{s}}
+\def \ttilde{\tilde{t}}
+\def \utilde{\tilde{u}}
+\def \vtilde{\tilde{v}}
+\def \wtilde{\tilde{w}}
+\def \xtilde{\tilde{x}}
+\def \ytilde{\tilde{y}}
+\def \ztilde{\tilde{z}}
+
+
+\def \calAhat{\hat{\mathcal{A}}}
+\def \calBhat{\hat{\mathcal{B}}}
+\def \calChat{\hat{\mathcal{C}}}
+\def \calDhat{\hat{\mathcal{D}}}
+\def \calEhat{\hat{\mathcal{E}}}
+\def \calFhat{\hat{\mathcal{F}}}
+\def \calGhat{\hat{\mathcal{G}}}
+\def \calHhat{\hat{\mathcal{H}}}
+\def \calIhat{\hat{\mathcal{I}}}
+\def \calJhat{\hat{\mathcal{J}}}
+\def \calKhat{\hat{\mathcal{K}}}
+\def \calLhat{\hat{\mathcal{L}}}
+\def \calMhat{\hat{\mathcal{M}}}
+\def \calNhat{\hat{\mathcal{N}}}
+\def \calOhat{\hat{\mathcal{O}}}
+\def \calPhat{\hat{\mathcal{P}}}
+\def \calQhat{\hat{\mathcal{Q}}}
+\def \calRhat{\hat{\mathcal{R}}}
+\def \calShat{\hat{\mathcal{S}}}
+\def \calThat{\hat{\mathcal{T}}}
+\def \calUhat{\hat{\mathcal{U}}}
+\def \calVhat{\hat{\mathcal{V}}}
+\def \calWhat{\hat{\mathcal{W}}}
+\def \calXhat{\hat{\mathcal{X}}}
+\def \calYhat{\hat{\mathcal{Y}}}
+\def \calZhat{\hat{\mathcal{Z}}}
+
+
+\def \calAtilde{\tilde{\mathcal{A}}}
+\def \calBtilde{\tilde{\mathcal{B}}}
+\def \calCtilde{\tilde{\mathcal{C}}}
+\def \calDtilde{\tilde{\mathcal{D}}}
+\def \calEtilde{\tilde{\mathcal{E}}}
+\def \calFtilde{\tilde{\mathcal{F}}}
+\def \calGtilde{\tilde{\mathcal{G}}}
+\def \calHtilde{\tilde{\mathcal{H}}}
+\def \calItilde{\tilde{\mathcal{I}}}
+\def \calJtilde{\tilde{\mathcal{J}}}
+\def \calKtilde{\tilde{\mathcal{K}}}
+\def \calLtilde{\tilde{\mathcal{L}}}
+\def \calMtilde{\tilde{\mathcal{M}}}
+\def \calNtilde{\tilde{\mathcal{N}}}
+\def \calOtilde{\tilde{\mathcal{O}}}
+\def \calPtilde{\tilde{\mathcal{P}}}
+\def \calQtilde{\tilde{\mathcal{Q}}}
+\def \calRtilde{\tilde{\mathcal{R}}}
+\def \calStilde{\tilde{\mathcal{S}}}
+\def \calTtilde{\tilde{\mathcal{T}}}
+\def \calUtilde{\tilde{\mathcal{U}}}
+\def \calVtilde{\tilde{\mathcal{V}}}
+\def \calWtilde{\tilde{\mathcal{W}}}
+\def \calXtilde{\tilde{\mathcal{X}}}
+\def \calYtilde{\tilde{\mathcal{Y}}}
+\def \calZtilde{\tilde{\mathcal{Z}}}
+
+
+\def \bfa{\mathbf{a}}
+\def \bfb{\mathbf{b}}
+\def \bfc{\mathbf{c}}
+\def \bfd{\mathbf{d}}
+\def \bfe{\mathbf{e}}
+\def \bff{\mathbf{f}}
+\def \bfg{\mathbf{g}}
+\def \bfh{\mathbf{h}}
+\def \bfi{\mathbf{i}}
+\def \bfj{\mathbf{j}}
+\def \bfk{\mathbf{k}}
+\def \bfl{\mathbf{l}}
+\def \bfm{\mathbf{m}}
+\def \bfn{\mathbf{n}}
+\def \bfo{\mathbf{o}}
+\def \bfp{\mathbf{p}}
+\def \bfq{\mathbf{q}}
+\def \bfr{\mathbf{r}}
+\def \bfs{\mathbf{s}}
+\def \bft{\mathbf{t}}
+\def \bfu{\mathbf{u}}
+\def \bfv{\mathbf{v}}
+\def \bfw{\mathbf{w}}
+\def \bfx{\mathbf{x}}
+\def \bfy{\mathbf{y}}
+\def \bfz{\mathbf{z}}
+
+
+\def \bfA{\mathbf{A}}
+\def \bfB{\mathbf{B}}
+\def \bfC{\mathbf{C}}
+\def \bfD{\mathbf{D}}
+\def \bfE{\mathbf{E}}
+\def \bfF{\mathbf{F}}
+\def \bfG{\mathbf{G}}
+\def \bfH{\mathbf{H}}
+\def \bfI{\mathbf{I}}
+\def \bfJ{\mathbf{J}}
+\def \bfK{\mathbf{K}}
+\def \bfL{\mathbf{L}}
+\def \bfM{\mathbf{M}}
+\def \bfN{\mathbf{N}}
+\def \bfO{\mathbf{O}}
+\def \bfP{\mathbf{P}}
+\def \bfQ{\mathbf{Q}}
+\def \bfR{\mathbf{R}}
+\def \bfS{\mathbf{S}}
+\def \bfT{\mathbf{T}}
+\def \bfU{\mathbf{U}}
+\def \bfV{\mathbf{V}}
+\def \bfW{\mathbf{W}}
+\def \bfX{\mathbf{X}}
+\def \bfY{\mathbf{Y}}
+\def \bfZ{\mathbf{Z}}
+
+
+\def \bffA{{\text{\bfseries A}}}
+\def \bffB{{\text{\bfseries B}}}
+\def \bffC{{\text{\bfseries C}}}
+\def \bffD{{\text{\bfseries D}}}
+\def \bffE{{\text{\bfseries E}}}
+\def \bffF{{\text{\bfseries F}}}
+\def \bffG{{\text{\bfseries G}}}
+\def \bffH{{\text{\bfseries H}}}
+\def \bffI{{\text{\bfseries I}}}
+\def \bffJ{{\text{\bfseries J}}}
+\def \bffK{{\text{\bfseries K}}}
+\def \bffL{{\text{\bfseries L}}}
+\def \bffM{{\text{\bfseries M}}}
+\def \bffN{{\text{\bfseries N}}}
+\def \bffO{{\text{\bfseries O}}}
+\def \bffP{{\text{\bfseries P}}}
+\def \bffQ{{\text{\bfseries Q}}}
+\def \bffR{{\text{\bfseries R}}}
+\def \bffS{{\text{\bfseries S}}}
+\def \bffT{{\text{\bfseries T}}}
+\def \bffU{{\text{\bfseries U}}}
+\def \bffV{{\text{\bfseries V}}}
+\def \bffW{{\text{\bfseries W}}}
+\def \bffX{{\text{\bfseries X}}}
+\def \bffY{{\text{\bfseries Y}}}
+\def \bffZ{{\text{\bfseries Z}}}
+
+\def \bffa{{\text{\bfseries a}}}
+\def \bffb{{\text{\bfseries b}}}
+\def \bffc{{\text{\bfseries c}}}
+\def \bffd{{\text{\bfseries d}}}
+\def \bffe{{\text{\bfseries e}}}
+\def \bfff{{\text{\bfseries f}}}
+\def \bffg{{\text{\bfseries g}}}
+\def \bffh{{\text{\bfseries h}}}
+\def \bffi{{\text{\bfseries i}}}
+\def \bffj{{\text{\bfseries j}}}
+\def \bffk{{\text{\bfseries k}}}
+\def \bffl{{\text{\bfseries l}}}
+\def \bffm{{\text{\bfseries m}}}
+\def \bffn{{\text{\bfseries n}}}
+\def \bffo{{\text{\bfseries o}}}
+\def \bffp{{\text{\bfseries p}}}
+\def \bffq{{\text{\bfseries q}}}
+\def \bffr{{\text{\bfseries r}}}
+\def \bffs{{\text{\bfseries s}}}
+\def \bfft{{\text{\bfseries t}}}
+\def \bffu{{\text{\bfseries u}}}
+\def \bffv{{\text{\bfseries v}}}
+\def \bffw{{\text{\bfseries w}}}
+\def \bffx{{\text{\bfseries x}}}
+\def \bffy{{\text{\bfseries y}}}
+\def \bffz{{\text{\bfseries z}}}
+
+
+
+
+\def \bfalpha{{\bm{\alpha}}}
+\def \bfbeta{{\bm{\beta}}}
+\def \bfgamma{{\bm{\gamma}}}
+\def \bfdelta{{\bm{\delta}}}
+\def \bfepsilon{{\bm{\epsilon}}}
+\def \bfzeta{{\bm{\zeta}}}
+\def \bfeta{{\bm{\eta}}}
+\def \bftheta{{\bm{\theta}}}
+\def \bfiota{{\bm{\iota}}}
+\def \bfkappa{{\bm{\kappa}}}
+\def \bflambda{{\bm{\lambda}}}
+\def \bfmu{{\bm{\mu}}}
+\def \bfnu{{\bm{\nu}}}
+\def \bfxi{{\bm{\xi}}}
+\def \bfomicron{{\bm{\omicron}}}
+\def \bfpi{{\bm{\pi}}}
+\def \bfrho{{\bm{\rho}}}
+\def \bfsigma{{\bm{\sigma}}}
+\def \bftau{{\bm{\tau}}}
+\def \bfupsilon{{\bm{\upsilon}}}
+\def \bfphi{{\bm{\phi}}}
+\def \bfchi{{\bm{\chi}}}
+\def \bfpsi{{\bm{\psi}}}
+\def \bfomega{{\bm{\omega}}}
+
+\def \bfAlpha{{\bm{\Alpha}}}
+\def \bfBeta{{\bm{\Beta}}}
+\def \bfGamma{{\bm{\Gamma}}}
+\def \bfDelta{{\bm{\Delta}}}
+\def \bfEpsilon{{\bm{\Epsilon}}}
+\def \bfZeta{{\bm{\Zeta}}}
+\def \bfEta{{\bm{\Eta}}}
+\def \bfTheta{{\bm{\Theta}}}
+\def \bfIota{{\bm{\Iota}}}
+\def \bfKappa{{\bm{\Kappa}}}
+\def \bfLambda{{\bm{\Lambda}}}
+\def \bfMu{{\bm{\Mu}}}
+\def \bfNu{{\bm{\Nu}}}
+\def \bfXi{{\bm{\Xi}}}
+\def \bfOmicron{{\bm{\Omicron}}}
+\def \bfPi{{\bm{\Pi}}}
+\def \bfRho{{\bm{\Rho}}}
+\def \bfSigma{{\bm{\Sigma}}}
+\def \bfTau{{\bm{\Tau}}}
+\def \bfUpsilon{{\bm{\Upsilon}}}
+\def \bfPhi{{\bm{\Phi}}}
+\def \bfChi{{\bm{\Chi}}}
+\def \bfPsi{{\bm{\Psi}}}
+\def \bfOmega{{\bm{\Omega}}}

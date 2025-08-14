@@ -1,0 +1,25 @@
+\begin{tikzpicture}[scale = 1.125]
+
+	\draw[thick,->](-0.5,0) --++ (2.5,0);
+	\draw[thick,->](0,-0.5) --++ (0,3);
+	\draw[thick](1,-0.0625) node[below]{$1$} --++ (0,0.125);
+	\draw[thick](-0.0625,1.25) node[left]{$\sqrt{M}-1$} --++ (0.125,0);
+
+	\draw[color = cyan, fill = cyan!50!blue] (1,1.25) circle (0.3);
+	\draw[fill = black] (1,1.25) circle (0.05);
+
+	\draw[dashed] (0,0) --++ (1.5,1.875);
+	\draw[dashed] (0,0) --++ (1,1.875);
+
+
+	\draw[thick] (1,1.25) --++ (0.3,-0.3) node[right, below = 3pt]
+		{\small $r=\sqrt{\frac{3}{M\d\SNR}}$};
+	\draw[thick,->] (1.3,0.95) --++ (-0.1,+0.1);
+
+	\draw[thick,->] (0,1.5) arc[start angle=90, end angle=61.34, radius=1.5];
+	\node at (0.5,2.5) {\footnotesize $\theta_0$};
+
+	\draw[thick,<-] (1.375,1.75) arc(45:90:1.95);
+	\node at (0.3,1.75) {\footnotesize $\theta_{\max}$};
+
+\end{tikzpicture}

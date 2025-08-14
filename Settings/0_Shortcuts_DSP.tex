@@ -1,0 +1,221 @@
+% ------------------------------------------------------------------------------
+% ----- INFORMATIONS -----
+%   Author          : louis tomczyk
+%   Institution     : Telecom Paris
+%   Email           : louis.tomczyk@telecom-paris.fr
+%   Arxivs          : 2024-07-30 (1.0.0)
+%                   : 2024-10-17 (1.1.0) [NEW] NBpF, vsop, cfo
+%                   : 2024-10-24 (1.2.0) [NEW] BER
+%                   : 2024-11-08 (1.3.0) [NEW] Vsop, SER
+%                       NSb/T -> NSb,T
+%                   : 2024-12-13 (1.4.0) [NEW] mimoBf, TSb
+%                   : 2024-12-25 (1.5.0) [NEW] rolloff
+%                   : 2025-03-25 (1.6.0) [NEW] ELBO, S-> Sb for TSb et Rs
+%                   : 2024-12-28 (1.7.0) [NEW] lr
+%                   : 2024-12-29 (1.8.0) [NEW] NFtrain, NFtot
+%                   : 2025-04-02 (1.9.0) [NEW] vecX/Y-H/V-I/Q
+%   Date            : 2025-04-17 (1.10.0) [NEW] Sb
+%   Version         : 1.10.0
+%   License         : cc-by-nc-sa
+%                       CAN:    modify - distribute
+%                       CANNOT: commercial use
+%                       MUST:   share alike - include license
+% ------------------------------------------------------------------------------
+
+% ----------- A
+\def \algo{\mathrm{algo}}
+\def \ANLI{A_{\mathrm{NLI}}}
+\def \aNLI{a_{\mathrm{NLI}}}
+
+% ----------- B
+\def \BER{\mathrm{BER}}
+\def \bfmimo{\mathbf{mimo}}
+
+
+% ----------- C
+\def \cd{\mathrm{CD}}
+\def \cdc{\mathrm{cdc}}
+\def \cpr{\mathrm{cpr}}
+\def \channel{\mathrm{channel}}
+\def \cma{\mathrm{CMA}}
+\def \cfo{\mathrm{CFO}}
+\def \conv{\mathrm{conv}}
+
+% ----------- D
+
+
+% ----------- E
+\def \ELBO{\mathrm{ELBO}}
+
+% ----------- F
+\def \fs{f_{\mathrm{s}}}
+\def \fpol{\Delta p}
+
+% ----------- G
+% ----------- H
+\def \hchannel{\mathbf{h}_{\bm{\channel}}}
+\def \hmimo{\mathbf{h}_{\textbf{\text{mimo}}}}
+\def \hHH{\vech_{HH}}
+\def \hHV{\vech_{HV}}
+\def \hVH{\vech_{VH}}
+\def \hVV{\vech_{VV}}
+
+\def \hHHI{\vec{h}_{HH,I}}
+\def \hHVI{\vec{h}_{HV,I}}
+\def \hVHI{\vec{h}_{VH,I}}
+\def \hVVI{\vec{h}_{VV,I}}
+
+\def \hHHQ{\vec{h}_{HH,Q}}
+\def \hHVQ{\vec{h}_{HV,Q}}
+\def \hVHQ{\vec{h}_{VH,Q}}
+\def \hVVQ{\vec{h}_{VV,Q}}
+
+
+\def \vecDHHHI{\vec{D}_{HHH,I}}
+\def \vecDHVVI{\vec{D}_{HVV,I}}
+\def \vecDVHHI{\vec{D}_{VHH,I}}
+\def \vecDVVVI{\vec{D}_{VVV,I}}
+
+\def \vecDHHHQ{\vec{D}_{HHH,Q}}
+\def \vecDHVVQ{\vec{D}_{HVV,Q}}
+\def \vecDVHHQ{\vec{D}_{VHH,Q}}
+\def \vecDVVVQ{\vec{D}_{VVV,Q}}
+
+
+% ----------- I
+% ----------- J
+% ----------- K
+% ----------- L
+\def \lr{\mathrm{lr}}
+
+% ----------- M
+\def \MAX{^\mathrm{max}}
+\def \mimo{\mathrm{mimo}}
+
+% ----------- N
+\def \NBpF{{N_\mathrm{{B/F}}}}
+\def \NSbB{{N_\mathrm{{Sb/B}}}}
+\def \NSbF{{N_\mathrm{{Sb/F}}}}
+\def \NspB{{N_\mathrm{{sp/B}}}}
+\def \NSbT{{N_\mathrm{{Sb,T}}}}
+\def \NspT{{N_\mathrm{{sp,T}}}}
+\def \NT{{N_\mathrm{{T}}}}
+\def \NSb{{N_\mathrm{Sb}}}
+\def \Nf{{N_\mathrm{F}}}
+\def \NFch{{N_\mathrm{F,ch}}}
+\def \NFconv{{N_\mathrm{F,conv}}}
+\def \NFmax{{N_\mathrm{F,max}}}
+\def \NFtot{{N_\mathrm{F,tot}}}
+\def \NFtrain{{N_\mathrm{F,train}}}
+
+% ----------- P
+\def \pcs{\mathrm{PCS}}
+\def \pmd{\mathrm{pmd}}
+\def \pol{\mathrm{pol}}
+
+
+% ----------- Q
+% ----------- R
+\def \rolloff{\beta_\mathrm{rrc}}
+\def \Rs{R_\mathrm{Sb}}
+\def \rx{\mathrm{rx}}
+\def \rrc{\rm{rrc}}
+
+
+% ----------- S
+\def \Sb{{\mathrm{Sb}}}
+\def \SER{\mathrm{SER}}
+\def \SNR{\mathrm{SNR}}
+
+% ----------- T
+\def \tx{\mathrm{tx}}
+\def \TSb{{T_{\mathrm{Sb}}}}
+\def \Tf{{T_{\mathrm{F}}}}
+
+% ----------- U
+% ----------- V
+\def \vaebm{\mathrm{VAE\textbf{-FIR}}}
+\def \vae{\mathrm{VAE-FIR}}
+\def \VAE{\mathrm{VAE}}
+\def \vsop{v_{\mathrm{SoP}}}
+\def \Vsop{V_{\mathrm{SoP}}}
+
+\def \vch{v_{\mathrm{ch}}}
+\def \Vch{V_{\mathrm{ch}}}
+
+\def \vecycd{\vecy_{\textbf{\text{CD}}}}
+\def \vecycdH{\vecy_{\textbf{\text{CD,H}}}}
+\def \vecycdV{\vecy_{\textbf{\text{CD,V}}}}
+
+\def \vecymimo{\vecy_{\textbf{\text{mimo}}}}
+\def \vecymimoH{\vecy_{\textbf{\text{mimo,H}}}}
+\def \vecymimoV{\vecy_{\textbf{\text{mimo,V}}}}
+
+\def \vecXH{{\vec{X}_H}}
+\def \vecXV{{\vec{X}_V}}
+\def \vecYH{{\vec{Y}_H}}
+\def \vecYV{{\vec{Y}_V}}
+
+\def \vecXHI{{\vec{X}_{HI}}}
+\def \vecXVI{{\vec{X}_{VI}}}
+\def \vecYHI{{\vec{Y}_{HI}}}
+\def \vecYVI{{\vec{Y}_{VI}}}
+
+\def \vecXHQ{{\vec{X}_{HQ}}}
+\def \vecXVQ{{\vec{X}_{VQ}}}
+\def \vecYHQ{{\vec{Y}_{HQ}}}
+\def \vecYVQ{{\vec{Y}_{VQ}}}
+
+\def \vecxH{{\vec{x}_H}}
+\def \vecxV{{\vec{x}_V}}
+\def \vecyH{{\vec{y}_H}}
+\def \vecyV{{\vec{y}_V}}
+
+\def \vecxHI{{\vec{x}_{HI}}}
+\def \vecxVI{{\vec{x}_{VI}}}
+\def \vecyHI{{\vec{y}_{HI}}}
+\def \vecyVI{{\vec{y}_{VI}}}
+
+\def \vecxHQ{{\vec{x}_{HQ}}}
+\def \vecxVQ{{\vec{x}_{VQ}}}
+\def \vecyHQ{{\vec{y}_{HQ}}}
+\def \vecyVQ{{\vec{y}_{VQ}}}
+
+\def \vecxI{{\vec{x}_{I}}}
+\def \vecyI{{\vec{y}_{I}}}
+\def \vecxQ{{\vec{x}_{Q}}}
+\def \vecyQ{{\vec{y}_{Q}}}
+
+\def \vecXI{{\vec{X}_{I}}}
+\def \vecYI{{\vec{Y}_{I}}}
+\def \vecXQ{{\vec{X}_{Q}}}
+\def \vecYQ{{\vec{Y}_{Q}}}
+
+
+
+% ----------- W
+
+
+
+\def \xa{\vec{x}_{\alpha}}
+\def \xaI{\vec{x}_{\alpha,I}}
+\def \xaQ{\vec{x}_{\alpha,Q}}
+
+\def \xHI{\vec{x}_{H,I}}
+\def \xHQ{\vec{x}_{H,Q}}
+\def \xVI{\vec{x}_{V,I}}
+\def \xVQ{\vec{x}_{V,Q}}
+
+
+% ----------- Y
+
+\def \ycd{y_{\cd}}
+\def \ycdH{y_{\cd,H}}
+\def \ycdV{y_{\cd,V}}
+
+\def \ymimo{y_{\mimo}}
+\def \ymimoH{y_{\mimo,H}}
+\def \ymimoV{y_{\mimo,V}}
+
+
+% ----------- Z

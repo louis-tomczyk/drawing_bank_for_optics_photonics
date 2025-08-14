@@ -1,0 +1,273 @@
+% ------------------------------------------------------------------------------
+% ----- INFORMATIONS -----
+%   Author          : louis tomczyk
+%   Institution     : Telecom Paris
+%   Email           : louis.tomczyk@telecom-paris.fr
+%   Arxivs          : 2024-05-01 (1.0.0)
+%                   : 2024-05-06 [NEW] pipe, mymax, myargmax, integers
+%                   : 2024-05-25 [NEW] myeq
+%   Date            : 2024-05-30 [NEW] sgn
+%   Version         : 1.1.0
+%   License         : cc-by-nc-sa
+%                       CAN:    modify - distribute
+%                       CANNOT: commercial use
+%                       MUST:   share alike - include license
+% ------------------------------------------------------------------------------
+
+% ============================================================== DEFINITIONS
+% ----------- A
+\def \And{\quad\&\quad}
+
+% ----------- B
+% ----------- C
+\def \calEH{\mathcal{E}^\mathtt{H}}
+\def \calET{\mathcal{E}^\mathtt{T}}
+\def \calXhat{\hat{\mathcal{X}}}
+\def \card{\mathrm{card}}
+\def \cov{\text{cov}}
+
+% ----------- D
+\def \d{\cdot}
+\def \DAPR{\mathrm{DAPR}}
+\def \dPhiPol{\Delta\Phi_{pol}}
+
+% ----------- E
+\def \epso{\varepsilon_0}
+\def \erf{\mathrm{erf}}
+\def \erfc{\mathrm{erfc}}
+
+% ----------- F
+\def \fdTheta{f_{\Delta\theta}}
+\def \fdTheta{f_{\Delta\theta}}
+\def \fdThetacorr{f_{\Delta\theta,corr}}
+
+
+% ----------- G
+% ----------- H
+\def \hatt{h_{att}}
+\def \hdc{h_{DC}}
+\def \hhat{\hat{h}}
+\def \Hhat{\hat{H}}
+\def \hlin{h_{lin}}
+\def \hlm{\vec{h}_{\lambda\mu}}
+\def \hlmI{\vec{h}_{\lambda\mu,I}}
+\def \hlmQ{\vec{h}_{\lambda\mu,Q}}
+\def \hnlin{h_{nlin}}
+\def \hpdl{h_{PDL}}
+\def \hpmd{h_{PMD}}
+
+% ----------- I
+\def \ind{\mathbb{1}}
+\def \Id{\bm{I_d}}
+
+% ----------- J
+% ----------- K
+% ----------- L
+\def \l{\left}
+\def \Lbp{L_{bp}}
+\def \Lcorr{L_{corr}}
+
+
+% ----------- M
+% ----------- N
+% ----------- O
+% ----------- P
+\def \pxy{p(x|y)}
+\def \pyx{p(y|x)}
+\def \px{p(x)}
+\def \py{p(y)}
+\def \pipe{\text{\textbar}}
+
+% ----------- Q
+\def \qxy{q(x|y)}
+\def \qyx{q(y|x)}
+\def \qx{q(x)}
+\def \qy{q(y)}
+
+
+% ----------- R
+\def \r{\right}
+\def \Rsymb{R_{symb}}
+\def \Rbit{R_{bit}}
+
+
+% ----------- S
+\def \Sp{\mathrm{Sp}}
+\def \sgn{\mathrm{sgn}}
+
+% ----------- T
+\def \tq{\quad \backslash\quad}
+\def \Tpolcorr{T_{\text{pol,corr}}}
+\def \Tpolbp{T_{\text{pol,bp}}}
+\def \Tsymb{T_{symb}}
+\def \Tbit{T_{bit}}
+\def \Tr{\mathrm{Tr}}
+
+
+% ----------- U
+% ----------- V
+\def \vbeta{\vec{\beta}}
+\def \vcalB{\vec{\mathcal{B}}}
+\def \vcalD{\vec{\mathcal{D}}}
+\def \vcalE{\vec{\mathcal{E}}}
+\def \vcalP{\vec{\mathcal{P}}}
+\def \vcalH{\vec{\mathcal{H}}}
+
+
+% ----------- W
+% ----------- X
+\def \xhat{\hat{x}}
+\def \Xhat{\hat{X}}
+\def \xtilde{\tilde{x}}
+
+
+% ----------- Y
+% ----------- Z
+
+
+
+
+
+
+
+
+
+% % ============================================================== NEWCOMMANDS
+% ----------- A
+% ----------- B
+\newcommand \Bpow[1]{\bigg|#1\bigg|^2}
+\newcommand \Bmean[1]{\bigg\langle #1\bigg\rangle}
+
+% ----------- C
+% ----------- D
+\newcommand \Div[1]{\text{div} \l(#1\r)}
+\newcommand \DKL[2]{\mathrm{D_{KL}}\bigg[#1\bigg|\bigg| #2\bigg]}
+\newcommand \dkl[2]{\mathrm{D_{KL}}\l[#1\parallel #2\r]}
+\newcommand \mydot[1]{\overset{\raisebox{0.1ex}{\scalebox{0.5}{$\bullet$}}}{#1}}
+
+% ----------- E
+\newcommand \Equiv[1]{\underset{#1}{\thicksim}}
+\newcommand \Exp[1]{\cdot 10^{#1}}
+
+% ----------- F
+% ----------- G
+\newcommand \grad[1]{\textbf{\text{grad}} \l(#1\r) }
+
+% ----------- H
+% ----------- I
+\newcommand \integers[2]{\llbracket #1,#2 \rrbracket}
+
+
+% ----------- J
+% ----------- K
+% ----------- L
+\newcommand \logt[1]{\log\sub{10}\left(#1\right)}
+\newcommand \lap[1]{\Delta \l(#1\r) }
+\newcommand \lapvec[1]{\bm{\Delta} \l(#1\r) }
+
+% ----------- M
+\newcommand \mean[1]{\braket{#1}}
+\newcommand \mymax[2]{\underset{#1}{\text{max}}\left[#2\right]}
+\newcommand \myargmax[2]{\underset{#1}{\text{argmax}}\left[#2\right]}
+\newcommand \myeq[1]{\underset{#1}{=}}
+\newcommand \myunit[1]{~\mathrm{\left[#1\right]}}
+\newcommand \mymatrix[1]{
+    \begin{pmatrix}
+        #1
+    \end{pmatrix}
+}
+
+\newcommand \diag[1]{
+    \mathbf{diag}\begin{pmatrix}
+        #1
+    \end{pmatrix}
+}
+
+
+
+% ----------- N\newcommand \grad[1]{\textbf{\text{grad}} \l(#1\r) }
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+
+% ----------- O
+% ----------- P
+\newcommand \pow[1]{|#1|^2}
+\newcommand \Partial[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand \PartialHigher[3]{\dfrac{\partial^{#3} #1}{\partial #2^{#3}}}
+
+% ----------- Q
+% ----------- R
+\newcommand \rot[1]{\textbf{\text{rot}} \l(#1\r)}
+
+% ----------- S
+\newcommand \std[1]{\sigma(#1)}
+\newcommand \sub[1]{_{\mathrm{#1}}}
+
+
+% ----------- T
+\newcommand \To[1]{\underset{#1}{\to}}
+
+% ----------- U
+\newcommand \ups[1]{^{\mathrm{#1}}}
+
+
+% ----------- V
+\newcommand \var[1]{\sigma^2(#1)}
+\newcommand \vlap[1]{\bm{\Delta} \l(\bm{#1}\r)}
+\newcommand \vgrad[1]{\overrightarrow{\text{grad}} \l(#1\r) }
+
+% ----------- W
+% ----------- X
+% ----------- Y
+\def \ya{y_{\alpha}}
+\def \yaI{y_{\alpha,I}}
+\def \yaQ{y_{\alpha,Q}}
+\def \yHI{\tilde{y}_{H,I}}
+\def \yHQ{\tilde{y}_{H,Q}}
+\def \ytilde{\tilde{y}}
+\def \yVI{\tilde{y}_{V,I}}
+\def \yVQ{\tilde{y}_{V,Q}}
+
+% ----------- Z
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,74 @@
+\begin{tikzpicture}[scale = 1.375]
+    \laserSize{-0.75}{0}{red}{0.75}{}
+    \draw(-0.875,-0.375) node{\footnotesize laser};
+    \draw[thick,->, red] (0,0) --++ (1,0) node[midway, above]{$\bm{E}$};
+
+    \draw (1,-0.5) rectangle (3,0.5) node[midway, below = 2.25mm]{\footnotesize modulateur};
+    \draw[thick, purple] (1.25,0) --++ (0.25,0) --++ (0.25,0.25) --++ (0.5,0) --++ (0.25,-0.25) --++ (0.25,0) --++ (-0.25,0) --++ (-0.25,-0.25) --++ (-0.5,0) --++ (-0.25,0.25);
+    \draw[thick,->] (3,0) --++ (1,0) node[midway,above]{$\bm{x}$};
+
+    \draw (0.5,1.5) rectangle (2.5,2.5) node[midway, below = 1mm]{rrc}; 
+    \begin{scope}
+        \clip (0.5,1.5) rectangle (2.5,2.5);
+        
+        % Tracé de la gaussienne
+        % y = 1.5 + e^{ - (x-2)^2 / (2 * 0.3^2) }
+        % - Elle atteint environ 2.5 pour x=2
+        % - Retombe vers 1.5 aux bords x=1 et x=3
+        \draw[domain=0.75:2.25, samples=200, smooth, variable=\x, thick, blue]
+         plot(\x,{1.625 + 0.75*exp(-(\x-1.5)^2/(2*0.3^2))});
+    \end{scope}
+
+        \draw (2.5,1.5) rectangle (3.5,2.5)node[midway, below right = 1.5mm and -1.5mm]{\scriptsize CNA};
+        \draw[domain=2.625:3.375, samples=100, smooth, variable=\x, black, thick]
+        plot(\x, {\x-1});
+
+\begin{scope}
+  \clip (2.5,1.5) rectangle (3.5,2.5);
+
+  % On définit les bornes en x
+  \def\xstart{2.625}
+  \def\xend{3.375}
+
+  % Nombre de "marches" (segments) voulus
+  \def\nsteps{5}
+
+  % Offset en y
+  \def\yoffset{0.075} % ajustez selon vos besoins
+
+  % Boucle pour dessiner l'escalier
+  \foreach \k in {0,...,\numexpr\nsteps-1\relax}{
+    % x gauche et x droite pour la k-ième marche
+    \pgfmathsetmacro{\xl}{\xstart + (\k)*(\xend-\xstart)/\nsteps}
+    \pgfmathsetmacro{\xr}{\xstart + (\k+1)*(\xend-\xstart)/\nsteps}
+
+    % Valeurs de la fonction en x gauche et x droite
+    % Ajout de \yoffset
+    \pgfmathsetmacro{\yl}{(\xl - 1) + \yoffset}
+    \pgfmathsetmacro{\yr}{(\xr - 1) + \yoffset}
+
+    % Tracé du segment horizontal puis du segment vertical
+    \draw[blue]
+      (\xl, \yl) -- (\xr, \yl) -- (\xr, \yr);
+  }
+\end{scope}
+
+\draw[white, ultra thick](2.5,1.5) --++ (0,1) node[midway, black]{+};
+    
+    \draw[thick, ->, blue] (2,1.5) --++ (0,-1)node[midway, right]{$\bm{e}$};
+
+    \draw (-1.5,1.5) rectangle (-0.25,2.5) node[midway]{codage};
+    \draw[thick, ->] (-0.25,2) --++ (0.75,0)node[midway, above]{$\bm{s}$};
+
+    \draw[thick, ->] (-2.25,2) --++ (0.75,0)node[midway, above]{$\bm{b}$};
+    
+    \draw[dashed] (4,0) --++ (0.5,0);
+
+    \MULTIPLEXER{4.25}{0}{1}{0}
+    \EDFA{5.75}{0}{0}{EDFA}
+    \draw[thick] (6.75,0) --++ (1.25,0);
+    \FIBRE{7.5}{0}{0}{}
+    \draw[dashed] (8,1.5) --++ (-1.125,0)node[midway, above = 1mm]{\Large $\substack{\text{canal}\\\text{(optique)}}$} --++ (0,-2.5) --++ (1.125,0);
+
+\end{tikzpicture}
+

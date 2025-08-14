@@ -1,0 +1,49 @@
+
+\begin{landscape}
+\begin{tikzpicture}
+
+% Time axis
+\draw[->] (0,0) -- (16,0) node[right] {année};
+\foreach \x/\label in {0/1850, 4/1900, 8/1950, 12/2000, 16/2020}
+  \draw (\x,0) -- (\x,-0.2) node[below] {\label};
+
+% Eras
+\fill[gray!30] (0,1.2) rectangle (8,2);
+\fill[gray!50] (8,1.2) rectangle (11,2);
+\fill[gray!20] (11,1.2) rectangle (16,2);
+\node at (4,1.6) {$\substack{\text{ère des}\\ \text{câbles télégraphiques}}$};
+\node at (9.5,1.6) {$\substack{\text{ère des}\\ \text{câbles coaxiaux}}$};
+\node at (13.5,1.6) {$\substack{\text{ère de la}\\ \text{fibre optique}}$};
+
+
+% Vertical lines for key events
+\foreach \x/\label in {
+  0.2/$\substack{\text{Premier câble}\\ \text{télégraphique mondial}}$,
+  0.8/$\substack{\text{Premier câble}\\ \text{télégraphique trans-atlantique}}$,
+  8.2/$\substack{\text{Premier câble}\\ \text{coaxial sous-marin}}$,
+  9.5/$\substack{\text{début de l'enfouissement}\\ \text{des câbles sous-marins}}$,
+  11.2/$\substack{\text{premier câble de fibres}\\ \text{optiques transatlantique}}$}
+{
+  \draw[red, thick] (\x,0) -- (\x,2.2);
+  \node[rotate=60, anchor=west] at (\x,2.3) {\label};
+}
+
+% Whale entanglements (blue)
+\foreach \x in {1.0, 2.2, 3.0, 4.0, 5.0, 5.4, 5.8, 6.2, 6.4, 6.6, 6.8, 7.0}
+	\fill[blue] (\x,0.6) circle (2pt);
+	\node[blue, anchor=west] at (7.2,0.6) { pas d'enchevêtrements depuis 1957};
+	\node[blue] at (-1,1.1)  {$\substack{\text{enchevêtrement}\\ \text{de baleines} \bullet}$};
+
+% Whale-related damage (green)
+\foreach \x in {1.0, 2.5, 3.5}
+	\draw (\x,0.4) node[brown!80!green]{ $\blacktriangle$}  ;
+\node[draw=none, fill=none, text=green!50!black] at (-1.1,0.5) {$\substack{\text{incidents induits}\\ \text{par des baleines} \blacktriangle}$};
+
+% Fish & shark bites (red)
+\foreach \x in {3.2, 4.2, 5.2, 6.0, 6.3, 6.6, 6.9, 7.2, 7.5, 7.8, 8.1, 8.4, 8.7, 9.0, 9.3, 9.6, 10.0, 11.0, 11.4}
+	\draw (\x,0.2) node[red]{ $\blacklozenge$}  ;
+	\node[red, anchor=west] at (11.5,0.2) { Pas d'incidents depuis 2006};
+	\node[red] at (-1,0) {$\substack{\text{morssures}\\ \text{de requins} \blacklozenge}$};
+
+\end{tikzpicture}
+\end{landscape}

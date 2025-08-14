@@ -1,0 +1,25 @@
+\begin{tikzpicture}
+	\begin{axis}[
+		    width       = 8cm,
+		    height      = 8cm,
+		    xlabel      = {Distance de propagation $z$ [m]},
+		    ylabel      = {Durée normalisée $\tau(z)/\tau_0$},
+		    legend pos  = north west,
+		    legend style= {draw=none},
+		    ymax        = 2,
+		    ytick       = {1, 1.414, 1.5, 2},
+		    yticklabels = {$1$,$\sqrt{2}$,$1.5$,$2$},
+		    grid        = major
+	]
+        % Courbe hyperbolique
+        \addplot[smooth, thick, blue, domain=0:15] 
+            {sqrt(1 + (x / 11)^2)};
+        \addlegendentry{$\frac{\tau(z)}{\tau_0} = \sqrt{1 + \l(\frac{z}{L_D}\r)^2}$}
+
+        % Ligne verticale à L_D
+        \addplot[dashed, red] coordinates {(11, 1) (11, 1.414)};
+        \addlegendentry{$z = L_D$}
+        \addplot[dashed, red] coordinates {(0, 1.414) (11, 1.414)};
+    \end{axis}
+\end{tikzpicture}
+

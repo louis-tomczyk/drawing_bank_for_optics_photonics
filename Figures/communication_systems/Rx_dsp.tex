@@ -1,0 +1,20 @@
+\begin{tikzpicture}[scale = 1]
+
+    % constellations
+    \constQPSK{0}{-2}{1}{0.075}{black}             % I/Q mod
+    \constNOISE{3}{-2}{1}{0}{0}{0.4}{0.4}{black}   % Channel
+    \constNOISE{6}{-2}{1}{0}{0}{0.33}{0.33}{black}  % CD
+    \draw[fill = black] (9,-2) circle (0.6);
+    \draw[fill = white] (9,-2) circle (0.45);
+    \constAx{9}{-2}{1}                                      % PMD
+    \constQPSKrot{12}{-2}{0.9}{0.125}{black}{-45}
+    \constQPSK{15}{-2}{1}{0.125}{black}                      % CPC
+
+    \boxaction{0}{-4}{\small I/Q mod}{black}
+    \boxaction{3}{-4}{\small Canal}{black}
+    \boxaction{6}{-4}{\small CD{\tiny $^{-1}$}}{black}
+    \boxaction{9}{-4}{\small MIMO}{black} 
+    \boxaction{12}{-4}{\small CFO}{black}
+    \boxaction{15}{-4}{\small CPR}{black}
+    
+\end{tikzpicture}

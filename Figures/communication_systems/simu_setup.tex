@@ -1,0 +1,54 @@
+\centering
+%\begin{footnotesize}
+    \begin{tikzpicture}[node distance=0.5cm and 1.15cm, scale = 1]
+
+
+\def\mycolorConv{magenta!50!white}
+\def\mycolorVAE{orange!50!white}
+
+% TX side
+\node[block]                    (symbol) {\large $\substack{\text{adressage des}\\ \text{symboles}}$};
+\node[block, below=of symbol, fill = \mycolorConv, text = black]   (pilot) {\large $\substack{\text{insertion pilotes}\\ \text{si CMA+PA-CPR}}$};
+\node[block, below=of pilot]    (pulse) {\large $\substack{\text{mise en forme}\\ \text{impulsion}}$};
+\node[block, below=of pulse]    (phase) {rotation de phase};
+
+\draw[arrow] (symbol) -- (pilot);
+\draw[arrow] (pilot) -- (pulse);
+\draw[arrow] (pulse) -- (phase);
+
+% Optical link elements
+
+\node[block, below= of phase]   (scrambler) {\large $\substack{\text{mélangeur de}\\ \text{polarisations}}$};
+\node[block, below= of scrambler]   (noise) {AWGCN};
+
+\draw[arrow] (scrambler) -- (noise);
+\draw[arrow, rounded corners = 3pt] (phase) -- (scrambler);
+
+
+% RX side
+\node[block, right=2cm of symbol, yshift = 0.4cm] (CohDet) {Coh Det};
+\node[block, below=of CohDet, xshift=-0.85cm, yshift = -0.4cm, fill = \mycolorConv, text = black] (cma) {CMA};
+\node[block, below=of cma, fill = \mycolorConv, text = black] (pacpr) {PA-CPR};
+\node[block, below=of pacpr, fill = \mycolorConv, text = black] (pilot_rem) {\large $\substack{\text{suppression}\\ \text{des pilotes}}$};
+
+%\node[block, right=of cma, xshift = -0.35cm] (vae) {VAE-FIR};
+\node[block, right=of cma, xshift = -0.65cm, fill = \mycolorVAE, text = black] (vae) {VAE-FIR};
+
+\node[block, below=of CohDet, yshift = -4.25cm] (ber) {\Large $\substack{\text{calcul}\\ \text{du BER}}$};
+
+\draw[arrow] (cma) -- (pacpr);
+\draw[arrow] (pacpr) -- (pilot_rem);
+\draw[arrow, rounded corners = 3pt] (noise.east) -- ++(1,0) -- ++(0,5.9) -- (CohDet.west);
+
+\draw[arrow, rounded corners = 3pt] (CohDet.south) -- ++(0,-0.25) -- ++(-0.85,0) -- (cma.north);
+\draw[arrow, rounded corners = 3pt] (CohDet.south) -- ++(0,-0.25) -- ++(0.8,0) -- (vae.north);
+\draw[arrow, rounded corners = 3pt] (vae.south) -- ++(0,-2.45) -- ++(-0.8,0) -- (ber.north);
+
+\draw[arrow, rounded corners = 3pt] (pilot_rem.south) -- ++(0,-0.35) -- ++(0.85,0) -- (ber.north);
+
+\node[dspbox=(symbol)(phase), label=above:{DSP transmetteur}] (tx_box) {};
+\node[dspbox=(scrambler)(noise), label=below:{lien optique}] (opt_box) {};
+\node[dspbox=(cma)(ber)(vae), label=below:{DSP récepteur}] (rx_box) {};
+
+\end{tikzpicture}
+%\end{footnotesize}

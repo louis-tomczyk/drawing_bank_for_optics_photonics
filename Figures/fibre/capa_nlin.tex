@@ -1,0 +1,113 @@
+\begin{tikzpicture}[scale=1]
+	\begin{semilogxaxis}[
+			height			=	9cm							,
+			width			=	9cm							,
+			xlabel			=	{Puissance}			,
+			ylabel			=	{Capacité}					,
+			xtick 			= 	\empty						,
+			ytick 			= 	\empty						,
+			legend entries =  	{Shannon\\
+								 $P_{\mathrm{NL,th}}=0, P_{\mathrm{L}}=0$\\
+								 $P_{\mathrm{NL,th}}=-3, P_{\mathrm{L}}=0$\\
+								 $P_{\mathrm{NL,th}}=-10, P_{\mathrm{L}}=0$\\
+								 $P_{\mathrm{NL,th}}=0, P_{\mathrm{L}}=-3$\\
+								 $P_{\mathrm{NL,th}}=0, P_{\mathrm{L}}=-10$\\},
+			legend style	=	{draw = none}				,
+			legend pos		=	north west					,
+ 			legend style 	= 	{font=\scriptsize}			,
+		    %grid 			=   both						,
+		    %minor tick num 	= 	4 							,
+		    %major grid style=   {thick,draw=gray!75} 		,
+			]
+
+		\addplot[
+			color 			=	black						,
+			line width		=	1pt							,
+			samples 		= 	100 						,
+			domain 			= 	10^(-5):0.0025				,
+			]
+			{ln(1+x/1e-4)};
+			
+		\addplot[% PNL = 0, PL = 0
+			color 			=	gray						,
+			line width		=	1pt							,
+			samples 		= 	50 						,
+			domain 			= 	10^(-5):0.0025				,
+			]
+			{ln(1+exp(-(x/(1e-3))^2)/(1-exp(-(x/(1e-3))^2)+1e-3/x))};
+			
+		\addplot[% PNL = -3, PL = 0
+			mark 			= 	square*						,
+			mark size 		=  	0.75pt							,
+			color 			=	blue						,
+			line width		=	1pt							,
+			samples 		= 	50 						,
+			domain 			= 	10^(-5):0.0025				,
+			]
+			{ln(1+exp(-(x/(5e-4))^2)/(1-exp(-(x/(5e-4))^2)+1e-3/x))};
+			
+		\addplot[% PNL = -10, PL = 0
+			mark 			= 	*							,
+			mark size 		=  	0.75pt							,
+			color 			=	red							,
+			line width		=	1pt							,
+			samples 		= 	50 							,
+			domain 			= 	10^(-5):0.0025				,
+			]
+			{ln(1+exp(-(x/(1e-4))^2)/(1-exp(-(x/(1e-4))^2)+1e-3/x))};
+
+		\addplot[% PNL = 0, PL = -3
+			mark 			= 	square*						,
+			mark size 		=  	0.75pt							,
+			only marks										,
+			color 			=	blue						,
+			line width		=	1pt							,
+			samples 		= 	30 							,
+			domain 			= 	10^(-5):0.0025				,
+			]
+			{ln(1+exp(-(x/(1e-3))^2)/(1-exp(-(x/(1e-3))^2)+5e-4/x))};
+
+		\addplot[% PNL = 0, PL = -10
+			mark 			= 	*							,
+			mark size 		=  	0.75pt						,
+			only marks										,
+			color 			=	red							,
+%			line width		=	1pt							,
+			samples 		= 	30 							,
+			domain 			= 	10^(-5):0.0025				,
+			dashed											,
+			]
+			{ln(1+exp(-(x/(1e-3))^2)/(1-exp(-(x/(1e-3))^2)+1e-4/x))};
+			
+		\addplot[
+			color 			=	black						,
+			line width		=	1pt							,
+			samples 		= 	100 						,
+			domain 			= 	10^(-5):0.0025				,
+			]
+			{ln(1+x/5e-4)};
+			
+		\addplot[
+			color 			=	black						,
+			line width		=	1pt							,
+			samples 		= 	100 						,
+			domain 			= 	10^(-5):0.0025				,
+			]
+			{ln(1+x/1e-3)};
+
+\node[anchor=north west, font=\small] (nlinlabel) at (axis cs:3e-5,1.5)
+    {\footnotesize $\substack{\text{régime}\\ \text{faiblement} \\ \text{non} \\ \text{linéaire}}$};
+
+\node[anchor=south west, font=\small] (linlabel) at (axis cs:1.5e-3,0.3)
+    {\footnotesize $\substack{\text{régime}\\ \text{fortement} \\ \text{non} \\ \text{linéaire}}$};
+    
+\draw(linlabel.south west) ++(-20pt,-7pt) circle (10pt);
+\draw[->, thick] (linlabel.west) -- (axis cs:7.8e-4,0.32);
+
+\draw[->, thick, dashed, red] (nlinlabel.south) -- (axis cs:3.4e-4,1.17);
+\draw[->, thick, dashed, blue] (nlinlabel.south) -- (axis cs:5e-4,0.5);
+
+
+	\end{semilogxaxis}
+\end{tikzpicture}
+

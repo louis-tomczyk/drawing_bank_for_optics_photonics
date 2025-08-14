@@ -1,0 +1,35 @@
+\begin{tikzpicture}[scale = 1]
+    \node (X) at (0,0) {$\bffX$};
+    \node (Y) at (5,0){$\bffY$};
+    \node[orange] (Xhat) at (0.5,2){$\Xhat$};
+
+    \draw[->] (X) -- (Y);
+    \draw[blue,thick] (X) edge[bend right,->,in = -90,out = -90](Y);
+    \draw[orange,thick,dashed] (Y) edge[bend right,->](Xhat);
+    \draw[dotted,ultra thick, blue] (Xhat) -- (X)
+    node[midway,above = 3pt,color = black, sloped]
+    {$ 0\leftarrow \dkl{\P_{\bfPsi}}{\P_{\bm{\Xhat}}}$};
+
+    \draw[rotate = -15,top color=orange,bottom color=black,color = white]
+    				(Xhat.south) rectangle (X.north);
+    \draw[->,black, line width=1.5pt, shorten <=40pt, shorten >=-2pt] 
+    				(Xhat) -- (X);
+
+    \draw[rounded corners = 5pt,fill = white] (1.5,-0.5) rectangle (3.5,0.5)
+		node[midway,above=-1mm]{canal}
+		node[midway,below]{$\Theta_{\mathrm{canal}}$};
+    \draw (0,-1.25) node[blue,rotate = -35]{$p_{\bffY|\bm{\Xhat}}$};
+    \draw (1.5,-1.875) node[blue]{$\Theta_\vae$};
+    	
+    	
+    \draw[top color=black,bottom color=blue,color = white,
+    	rotate around={-16:(2,-1)}](1.5,-1.625) rectangle (1.59,-0.75);
+    \draw[->,black, line width=1.5pt, shorten <=20pt, shorten >=-2pt,
+    	rotate around={-16:(2,-1)}](1.55,-1.5) -- (1.55,-0.75);
+
+    \draw[orange] (3.25,1.625) node[above,rotate = -25]{$\P_\bfPsi$};
+	\draw (3.15,-1) node{$\ln(p_{\bffY|\bm{\Xhat}})\to \bm{0}$};
+%    \draw (3.15,-1) node{$|\mathbf{y-h_{\text{canal}}\circledast x}|$};
+%    \draw (3,-1.375) node{$\to 0$};
+
+\end{tikzpicture}

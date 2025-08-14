@@ -1,0 +1,48 @@
+\begin{tikzpicture}
+
+    % TX
+	\draw (0,-0.5) rectangle (1.5,0.5) node[midway]{TX};
+	\draw (1.5,0) --++ (3,0);
+	
+    % entry spans
+	\draw (4.5,0) --++ (3,0);
+    \FIBRE{6}{0}{0}{$\substack{\ell,\alpha,\gamma,\beta_2}$}
+    \EDFA{7.5}{0}{0}{G,NF}
+    \draw (8.5,0) --++ (1,0);
+
+    % RX
+	\draw (9.5,-0.5) rectangle (11,0.5) node[midway]{RX};
+
+    \draw[->] (0.75,2) node{$\bullet$}node[above]{entrée fibre}--++ 
+    				(9.5,0) node{$\bullet$}node[above]{sortie fibre};
+
+    \draw[->, cyan!75!blue] (10.25,3) node{$\bullet$}node[above = 3pt]{entrée DSP} --++ 
+    				(-9.5,0) node{$\bullet$}node[above]{CDC};
+    				
+    \draw[->, cyan!50!blue] (0.75,4) node{$\bullet$} --++ 
+    				(9.5,0) node[above = 3pt]{entrée PPE};
+    
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\draw[thick,->, blue] (10.25,5) --++ (-0.25,0);
+	%\draw[blue] (10,5) node[above]{$\delta_1$CDC};
+	\draw[thick,->,redTelecom] (10,5) --++ (-9.25,0);
+	%\draw[thick,->,redTelecom]  (10,5) --++ (-9.25,0) node[midway,above]{$(1-\delta_1)$CDC};
+	
+	\draw[thick,->, blue] (10.25,5.25) --++ (-0.5,0);
+	\draw[blue] (9.75,5.25) node[above]{$\delta_2$CDC};
+	\draw[thick,->,redTelecom] (9.75,5.25) --++ (-9,0);
+	\draw[thick,->,redTelecom] (9.75,5.25) --++ (-9,0) node[midway, above]{$(1-\delta_2)$CDC};
+
+    \draw (3,5.75) node{$\vdots$};\draw (7.5,5.75) node{$\vdots$};
+    
+    \draw[thick,->, blue] (10.25,6) --++ (-9.25,0);
+	%\draw[blue] (10,6) node[above]{$\delta_N$CDC};
+    \draw[thick,->, redTelecom] (1,6) --++ (-0.25,0) node{$\bullet$};
+	%\draw[thick,->,redTelecom]  (1,6) --++ (-0.25,0);
+    
+    \draw[loosely dashed, color = redTelecom, fill = redTelecom, opacity = 0.3] (0.5,4.75) rectangle (10.5,6.25) node[above]{PPE};
+\end{tikzpicture}
+

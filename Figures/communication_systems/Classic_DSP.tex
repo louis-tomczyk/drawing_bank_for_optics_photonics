@@ -1,0 +1,19 @@
+\begin{tikzpicture}[every text node part/.style={align=center}]
+
+    \boxvalue{0}{0}{ CDC}{grayTelecom}
+    \boxvalue{3}{0}{ Demux}{redTelecom}
+    \mybox{5}{-0.75}{2}{1.5}{grayTelecom}{grayTelecom}{0.2}{\textcolor{black}{CFO}\\ CPR}
+    \mybox{8}{-1}{2.5}{2}{grayTelecom}{grayTelecom}{0.2}{ Decision \\ Decoding}
+    \boxvalue{12.5}{0}{ FEC}{grayTelecom}
+
+
+    \linkright{-2}{0}{1}{ $\vec{y}$}{}  % inputs
+    \linkright{1}{0}{1}{}{}             % CDC   - MIMO
+    \linkright{4}{0}{1}{}{}             % MIMO  - CC
+    \linkright{7}{0}{1}{}{}             % CC    - Decision
+    \linkright{10.5}{0}{1}{}{}          % Decision   - FEC
+    \linkright{13.5}{0}{1}{ ~ ~ 1101}{}     % output DSP
+
+    \draw[color = redTelecom] (4.5,0.5) node{$\bm{\hat{H}}$};
+
+\end{tikzpicture}

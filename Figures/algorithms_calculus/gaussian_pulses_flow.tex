@@ -1,0 +1,30 @@
+\begin{tikzpicture}[scale = 0.75]
+	\foreach \x in {-3,-2,0,1,2,3} {
+	\begin{scope}[shift={(\x,0)}]
+		\draw[domain=-0.5:0.5,smooth,variable=\x,samples=50]
+		plot ({\x}, {1*exp(-40*\x*\x)});
+	\end{scope}
+	}
+	\begin{scope}[shift={(-1,0)}]
+		\draw[domain=-0.5:0.5,smooth,variable=\x,samples=50, color = blue, thick]
+		plot ({\x}, {1*exp(-40*\x*\x)});
+	\end{scope}
+	
+	\draw[<->] (-3,1.1) to[bend left] (-1,1.1);
+	\draw[<->] (-2,1.1) to[bend left] (-1,1.1);
+	\draw[<->] (0,1.1) to[bend right] (-1,1.1);
+	\draw[<->] (1,1.1) to[bend right] (-1,1.1);
+	\draw[<->] (2,1.1) to[bend right] (-1,1.1);
+	\draw[<->] (3,1.1) to[bend right] (-1,1.1);
+	
+	\draw[dashed] (3.6,0) --++ (0.75,0) node[right = 2mm, above = 2mm]{$t\mapsto f(t)$};
+	
+	\node (Im3) at (-3,-0.25) 	{$|g_{0}|$};
+	\node (Im2) at (-2,-0.25) 	{$|g_{1}|$};
+	\node (Im1) at (-1,-0.25) 	{\Blue{$|g_{2}|$}};
+	\node (I0) at (0,-0.25) 	{$|g_3|$};
+	\node (Ip1) at (1,-0.25) 	{$|g_4|$};
+	\node (Ip2) at (2,-0.25) 	{$|g_5|$};
+	\node (Ip3) at (3,-0.25) 	{$|g_6|$};
+	\node (z) at (-3.5,1.5) 	{$z=0$};
+\end{tikzpicture}

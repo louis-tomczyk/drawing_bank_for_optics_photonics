@@ -1,0 +1,40 @@
+\begin{tikzpicture}
+
+    % constellations
+    \constQPSK{0}{-2}{1}{0.075}{black}             % I/Q mod
+    \constNOISE{3}{-2}{1}{0}{0}{0.25}{0.25}{black} % DPD
+    \constNOISE{6}{-2}{1}{0}{0}{0.4}{0.4}{black}   % Channel
+    \constNOISE{9}{-2}{1}{0}{0}{0.33}{0.33}{black}  % CD
+    \draw[fill = black] (12,-2) circle (0.5);
+    \draw[fill = white] (12,-2) circle (0.4);
+    \constAx{12}{-2}{1}                                      % PMD
+    
+	\constQPSKrot{15}{-2}{0.99}{0.125}{black}{0}
+	\constQPSKrot{15}{-2}{0.99}{0.125}{black}{2}
+	\constQPSKrot{15}{-2}{0.99}{0.125}{black}{-2}
+	\constQPSKrot{15}{-2}{0.98}{0.125}{black}{4}
+	\constQPSKrot{15}{-2}{0.98}{0.125}{black}{-4}
+	\constQPSKrot{15}{-2}{0.97}{0.125}{black}{6}
+	\constQPSKrot{15}{-2}{0.97}{0.125}{black}{-6}
+    
+    
+    \constNOISE{18}{-1}{0.875}{-0.5}{0}{0.15}{0.3}{magenta}     % Demod CPR
+    \constNOISE{18}{-3}{0.875}{-0.5}{0}{0.075}{0.075}{black}    % Demod QPSK
+    \constNOISE{21}{-2}{1}{0}{0}{0.075}{0.225}{black} % comp
+
+
+    \boxaction{0}{-4}{\footnotesize I/Q mod}{black}
+    \boxaction{3}{-4}{\footnotesize DPD}{black}
+    \boxaction{6}{-4}{\footnotesize Channel}{black}
+    \boxaction{9}{-4}{\footnotesize CDC}{black}
+    \boxaction{12}{-4}{\footnotesize MIMO}{black} 
+    \boxaction{15}{-4}{\footnotesize CC}{black}            
+    \boxaction{18}{1}{\footnotesize Demod}{magenta}
+    \boxaction{18}{-5}{\footnotesize Demod}{black}
+    \boxaction{21}{-4}{\footnotesize Power}{black}
+
+\end{tikzpicture}
+
+
+
+

@@ -1,0 +1,473 @@
+% ------------------------------------------------------------------------------
+% ----- INFORMATIONS -----
+%   Author          : louis tomczyk, chatgpt
+%   Institution     : Telecom Paris
+%   Email           : louis.tomczyk@telecom-paris.fr
+%   Arxivs          : 2024-02-11
+%                   : 2025-01-02 [NEW] laser size, pd
+%                   : 2025-01-03 [NEW] multiplexer
+%                   : 2025-01-04 [NEW] poincare sphere
+%   Date            : 2025-04-27 [NEW] poincare sphere tropique
+%   Version         : 1.4.0
+%   License         : cc-by-nc-sa
+%                       CAN:    modify - distribute
+%                       CANNOT: commercial use
+%                       MUST:   share alike - include license
+% ------------------------------------------------------------------------------
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\EDFA}[4]% #1 : abscisse, #2 ordonnée, #3 angle de rotation, #4 comment
+{
+    \draw[rotate around= {#3:(#1,#2)}, fill = white,thick] (#1,#2-0.5) --++ (1,0.5) --++ (-1,0.5) -- cycle;
+    \draw[rotate around= {#3:(#1,#2)}] (#1+0.5,#2+0.75)node{\footnotesize #4};
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\FIBRE}[4]% #1 : abscisse, #2 ordonnée, #3 angle de rotation, #4 comment
+{
+    \draw[rotate around= {#3:(#1,#2)}, fill = white,thick] (#1,#2+0.5) circle (0.5) node[above = 7pt]{\footnotesize #4};
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\VOA}[4]% #1 : abscisse, #2 ordonnée, #3 angle de rotation, #4 comment
+{
+    \draw[thick] (#1-0.5,#2) --++ (1,0);
+    \draw[rotate around= {#3:(#1,#2)}, fill = white,thick] (#1,#2) circle (0.25) node[above = 7pt]{\footnotesize #4};
+    \draw[thick,->] (#1-0.3,#2-0.3) --++ (0.6,0.6);%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\MZM}[4]% #1 : abscisse, #2 ordonnée, #3 supp length, #4 color
+{
+	\draw[color = #4,thick] (#1,#2) --++ (1,0) --++ (1,1) --++ (2,0) --++ (1,-1) --++ (1+#3,0) --++ (-1-#3,0) --++ (-1,-1) --++ (-2,0) --++ (-1,1);
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\MZMpi}[3]% #1 : abscisse, #2 ordonnée, #3 color
+{
+	\draw[color = #3,thick] (#1,#2) --++ (1,0) --++ (1,1) --++ (2,0) --++ (1,-1) --++ (1,0) --++ (-1,0) --++ (-1,-1) --++ (-2,0) --++ (-1,1);
+	\draw[color = #3,fill = white,thick] (#1+5.5,#2-0.5) rectangle (#1+6.5,#2+0.5) node[midway]{$\dfrac{\pi}{2}$};
+	\draw[color = #3] (#1+6.5,#2) --++ (0.5,0);
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\VoltBox}[4]% #1 : abscisse, #2 ordonnée, #3 text, #4 color edges
+{
+	\draw[color = #4] (#1,#2) rectangle (#1+1,#2+1) node[midway]{$U#3$};
+	\draw[color = #4,->,thick] (#1+0.5,#2+1) --++ (0,0.5);
+	\draw[color = #4,->,thick] (#1+0.5,#2) --++ (0,-0.5);
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\PBS}[3]% #1 : abscisse, #2 ordonnée, #3 scale
+{
+    \draw[fill = white] (#1*#3,#2*#3) rectangle (#1*#3+1*#3,#2*#3+1*#3) node[midway, below = 5pt]{\footnotesize PBS};
+\draw (#1*#3,#2*#3) --++ (1*#3,0) --++ (0,1*#3) --++ (-1*#3,-1*#3) --++ (0,1*#3) --++ (1*#3,0);
+	\draw (#1*#3+0.75*#3,#2*#3+0.1875*#3) node{$\bullet$};
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\LED}[3] % #1 abscisse, #2 ordonnée, #3 color
+{
+	\draw[thick, color = #3] (#1,#2+1.5) --++ (0,-0.75);
+	\draw[thick, color = #3] (#1-0.75,#2-0.75) rectangle (#1+0.75,#2+0.75);
+	\draw[thick, color = #3] (#1,#2+0.625) --++ (0,-0.25) --++ (-0.4,0) --++ (0.4,-0.625) --++ (0,-0.25) --++ (0,0.25) --++ (-0.375,0) --++ (0.75,0) --++ (-0.375,0)--++ (0.4,0.625) --++ (-0.4,0);
+	
+	\draw[thick, color = #3] (#1+0.4,#2-0.5) node[rotate = -40]{$\to$};
+	\draw[thick, color = #3] (#1+0.2,#2-0.52) node[rotate = -90]{$\to$};
+	
+	\draw[thick, color = #3] (#1,#2-0.75) --++ (0,-0.75);
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\PD}[4] % #1 abscisse, #2 ordonnée, #3 color
+{
+	\draw[thick, color = #3] (#1*#4-0.75*#4,#2*#4-0.75*#4) rectangle (#1*#4+0.75*#4,#2*#4+0.75*#4);
+	\draw[thick, color = #3] (#1*#4,#2*#4+0.625*#4) --++ (0,-0.25*#4) --++ (-0.4*#4,0) --++ (0.4*#4,-0.625*#4) --++ (0,-0.25*#4) --++ (0,0.25*#4) --++ (-0.375*#4,0) --++ (0.75*#4,0) --++ (-0.375*#4,0)--++ (0.4*#4,0.625*#4) --++ (-0.4*#4,0);
+	
+	\draw[thick, color = #3] (#1*#4-0.45*#4,#2*#4-0.5*#4) node[rotate = 40]{\scriptsize $\bm{\to}$};
+	\draw[thick, color = #3] (#1*#4-0.25*#4,#2*#4-0.52*#4) node[rotate = 40]{\scriptsize$\bm{\to}$};
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\laser}[3] % #1 abscisse, #2 ordonnée, #3 color
+{
+	\draw[thick, color = #3] (#1,#2+1.5) --++ (0,-0.75);
+	\draw[thick, color = #3] (#1-0.75,#2-0.75) rectangle (#1+0.75,#2+0.75);
+	\draw[thick, color = #3] (#1,#2+0.625) --++ (0,-0.25) --++ (-0.4,0) --++ (0.4,-0.625) --++ (0,-0.25) --++ (0,0.25) --++ (-0.375,0) --++ (0.75,0) --++ (-0.375,0)--++ (0.4,0.625) --++ (-0.4,0);
+	\draw[thick, color = #3] (#1+0.3,#2-0.5) node[rotate = -40]{$\to$};
+	\draw[thick, color = #3] (#1+0.5,#2-0.5) node[rotate = -45]{$\to$};
+	\draw[thick, color = #3] (#1,#2-0.75) --++ (0,-0.75);
+%	\draw[snake = coil, segment aspect  = 0, segment length = 2 mm, color = #3] (#1-0.25,#2+0.25) --++ (0.5,0);
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\laserSize}[5] % #1 abscisse, #2 ordonnée, #3 color, #4 scale, #5 comment
+{
+	\draw[color = black] (#1*#4-0.75*#4,#2*#4-0.75*#4) rectangle (#1*#4+0.75*#4,#2*#4+0.75*#4)node[midway,left = 0.5cm]{#5};
+	\draw[thick, color = #3, fill = #3] (#1*#4,#2*#4+0.625*#4) --++ (0,-0.25*#4) --++ (-0.4*#4,0) --++ (0.4*#4,-0.625*#4) --++ (0,-0.25*#4) --++ (0,0.25*#4) --++ (-0.375*#4,0) --++ (0.75*#4,0) --++ (-0.375*#4,0)--++ (0.4*#4,0.625*#4) --++ (-0.4*#4,0);
+	\draw[thick, color = #3] (#1*#4+0.3*#4,#2*#4-0.5*#4) node[rotate = -40]{\footnotesize $\bm{\to}$};
+	\draw[thick, color = #3] (#1*#4+0.5*#4,#2*#4-0.5*#4) node[rotate = -45]{\footnotesize $\bm{\to}$};
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\MULTIPLEXER}[4]{%
+  % #1 : Abscisse du "centre" du trapèze
+  % #2 : Ordonnée du "centre" du trapèze
+  % #3 : Facteur d'échelle (scale)
+  % #4 : Angle de rotation (en degrés)
+  \begin{scope}[
+    shift={({#1-0.25},{#2-1.5})},  % Décalage pour "placer" le centre
+    scale={#3},                    % Échelle
+    rotate={#4}                    % Rotation autour du nouveau centre
+  ]
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%  CANAUX MULTIPLEXES   %%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw[rounded corners=5pt, thick, draw=red]
+        (0.5,2.5) --++ (1,0) --++ (0.25,-1) --++ (0.25,0 );
+    \draw[dashed, thick, red]
+        (-0.5, 2.65) -- (0.5,2.5);
+
+    \draw[rounded corners=5pt, thick, draw=orange]
+        (0.5,2.25) --++ (1,0) --++ (0.25,-0.75) --++ (0.25,0 );
+    \draw[dashed, thick, orange]
+        (-0.5, 2.35) -- (0.5,2.25);
+
+    \draw[rounded corners=5pt, thick, draw=yellow]
+        (0.5,2) --++ (1,0) --++ (0.25,-0.5) --++ (0.25,0 );
+    \draw[dashed, thick, yellow]
+        (-0.5, 2.1) -- (0.5,2);
+
+    \draw[rounded corners=5pt, thick, draw=green]
+        (0.5,1.75) --++ (1,0) --++ (0.25,-0.25) --++ (0.25,0 );
+    \draw[dashed, thick, green]
+        (-0.5, 1.85) -- (0.5,1.75);
+
+    \draw[rounded corners=5pt, thick, draw=cyan]
+        (0.5,1.25) --++ (1,0) --++ (0.25,0.25) --++ (0.25,0 );
+    \draw[dashed, thick, cyan]
+        (-0.5, 1.15) -- (0.5,1.25);
+
+    \draw[rounded corners=5pt, thick, draw=blue]
+        (0.5,1) --++ (1,0) --++ (0.25,0.5) --++ (0.25,0 );
+    \draw[dashed, thick, blue]
+        (-0.5, 0.9) -- (0.5,1);
+
+    \draw[rounded corners=5pt, thick, draw=purple]
+        (0.5,0.75) --++ (1,0) --++ (0.25,0.75) --++ (0.25,0 );
+    \draw[dashed, thick, purple]
+        (-0.5, 0.65) -- (0.5,0.75);
+
+    \draw[rounded corners=5pt, thick, draw=purple!50!black]
+        (0.5,0.5) --++ (1,0) --++ (0.25,1) --++ (0.25,0 );
+    \draw[dashed, thick, purple!50!black]
+        (-0.5, 0.4) -- (0.5,0.5);
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%  FIBRE ET TRAPÈZE   %%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \draw[thick] (-0.5,1.5) --++ (2.5,0);
+
+    \draw[fill=white] 
+      (0,3)        coordinate(A)
+      -- (0.5,2.5) coordinate(B)
+      -- (0.5,0.5) coordinate(C)
+      -- (0,0)     coordinate(D)
+      -- cycle;
+      
+    \path let 
+      % On calcule le centre A-B
+      \p1 = ($ (A)!0.5!(B) $),
+      % Le centre C-D
+      \p2 = ($ (C)!0.5!(D) $)
+    in coordinate (trapCenter) at ($ (\p1)!0.5!(\p2) $);
+    
+    % On place le texte tourné autour de ce point
+    \node[rotate=#4-90] at (trapCenter) {\small multiplexeur};
+
+  \end{scope}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\SpherePoincareAxes}[3]{%
+  \begin{tikzpicture}[
+    shift={(#1,#2)},
+    scale=#3,
+    line cap=round,
+    line join=round
+  ]
+
+  % --- Cercle "extérieur" (projection de l'équateur) ---
+  \draw[thick] (1,0) arc[start angle=0, end angle=360, radius=1];
+
+  % --- Ellipse (arrière pointillé + avant plein) ---
+  \draw[dashed,lightgray] (1,0)
+       arc[start angle=0, end angle=180, x radius=1cm, y radius=0.4cm];
+  \draw[thick] (-1,0)
+       arc[start angle=180, end angle=360, x radius=1cm, y radius=0.4cm];
+
+  % --- Axes S1, S2, S3 (en pointillés jusqu'à un point, puis flèche) ---
+  \draw[gray, dotted] (0,0,0) --++ (0,0,1);
+  \draw[gray, dotted] (0,0,0) --++ (1,0,0);
+  \draw[gray, dotted] (0,0,0) --++ (0,1,0);
+
+  \draw[thick, ->] (0,0,1) --++ (0,0,0.2) node[below left]  {$S_1$};
+  \draw[thick, ->] (1,0,0) --++ (0.3,0,0) node[right]       {$S_2$};
+  \draw[thick, ->] (0,1,0) --++ (0,0.3,0) node[above left]  {$S_3$};
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %   Flèche "état de polarisation" quelconque en 3D
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \pgfmathsetmacro{\Theta}{75} % Angle polaire (par rapport à S1=z)
+  \pgfmathsetmacro{\phi}{35}   % Angle azimutal (dans le plan x-y => S2,S3)
+
+  % Conversion sphérique -> cartésienne
+  \pgfmathsetmacro{\x}{cos(\phi)*sin(\Theta)}
+  \pgfmathsetmacro{\y}{sin(\phi)*sin(\Theta)}
+  \pgfmathsetmacro{\z}{cos(\Theta)}
+
+  % Flèche épaisse vers (x,y,z)
+  \draw[ultra thick, ->, orange] (0,0,0) -- (\x,\y,\z);
+
+  \draw[->] (\x,\y,\z) --++ (0.6,0.48,0.6) node[right]{$\vecu_S$};
+  \draw[->] (\x,\y,\z) --++ (-0.3,0.4,-0.1) node[left, above]{$\vecu_\chi$};
+  \draw[->] (\x,\y,\z) --++ (0.1,0.1,-0.3) node[left, above]{$\vecu_\theta$};
+
+  % Projection en pointillés (sur S1-S3 => x=0)
+  \draw[dashed,orange] (0,0,0) -- (\x,0,\z);
+
+  % Arcs pour 2chi et 2theta
+  \draw[->,orange] (\x,0,\z) arc (0:28:1) node[midway, left = 3pt] {$\bm{2\chi}$};
+  \draw[->,orange] (0,0,0.6) arc[start angle=-55, end angle=0,
+            x radius=1.1, y radius=0.25] node[midway, below = 3pt] {$\bm{2\theta}$};
+
+  \end{tikzpicture}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\SpherePoincare}[3]{%
+\begin{tikzpicture}[
+shift={(#1,#2)},
+scale=#3,
+line cap=round,
+line join=round
+]
+
+% --- Cercle "extérieur" (projection de l'équateur) ---
+\draw[thick] (1,0) arc[start angle=0, end angle=360, radius=1];
+
+% --- Ellipse (arrière pointillé + avant plein) ---
+\draw[dashed,lightgray] (1,0) arc[start angle=0, end angle=180, x radius=1cm, y radius=0.4cm];
+\draw[thick] (-1,0) arc[start angle=180, end angle=360, x radius=1cm, y radius=0.4cm];
+
+% --- Axes S1, S2, S3 (en pointillés jusqu'à un point, puis flèche) ---
+\draw[gray, dotted] (0,0,0) --++ (0,0,1);
+\draw[gray, dotted] (0,0,0) --++ (1,0,0);
+\draw[gray, dotted] (0,0,0) --++ (0,1,0);
+
+\draw[thick, ->] (0,0,1) --++ (0,0,0.2) node[below left]  {$S_1$};
+\draw[thick, ->] (1,0,0) --++ (0.3,0,0) node[right]       {$S_2$};
+\draw[thick, ->] (0,1,0) --++ (0,0.3,0) node[above left]  {$S_3$};
+
+% S2 == x, 	S3 == y, 	S1 == z
+% 2theta == theta, 	2chi == phi
+\pgfmathsetmacro{\Theta}{75} % Angle polaire (par rapport à S1=z)
+\pgfmathsetmacro{\phi}{35}   % Angle azimutal (dans le plan x-y => S2,S3)
+
+% Conversion sphérique -> cartésienne
+\pgfmathsetmacro{\x}{cos(\phi)*sin(\Theta)}
+\pgfmathsetmacro{\y}{sin(\phi)*sin(\Theta)}
+\pgfmathsetmacro{\z}{cos(\Theta)}
+
+% Flèche épaisse vers (x,y,z)
+\draw[thick,dashed, ->, orange] (0,0,0) -- (\x,\y,\z);
+\draw[->,thick,orange] (\x,\y,\z) --++ (0.6,0.48,0.6) node[right]{$\vecu_\vecS$};
+\draw[->,thick,orange] (\x,\y,\z) --++ (-0.3,0.4,-0.1) node[left, above]{$\vecu_\chi$};
+\draw[->,thick,orange] (\x,\y,\z) --++ (0.1,0.1,-0.3) node[left, above]{$\vecu_\theta$};
+
+% Projection en pointillés (sur S1-S3 => x=0)
+\draw[dashed,orange] (0,0,0) -- (\x,0,\z);
+
+% Arcs pour 2chi et 2theta
+\draw[->,orange] (\x,0,\z) arc (0:28:1) node[midway, left] {$\bm{2\chi}$};
+\draw[->,orange] (0,0,0.6) arc[start angle=-55, end angle=0,
+        x radius=1.1, y radius=0.25] node[midway, below] {$\bm{2\theta}$};
+
+\end{tikzpicture}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\SpherePoincareTrop}[3]{%
+	\begin{tikzpicture}[
+	shift={(#1,#2)},
+	scale=#3,
+	line cap=round,
+	line join=round
+	]
+
+	% --- Cercle extérieur (équateur) ---
+	\draw[thick] (1,0) arc[start angle=0, end angle=360, radius=1];
+
+	% --- Ellipse (arrière pointillé + avant plein) ---
+	\draw[dashed,lightgray] (1,0)
+	   arc[start angle=0, end angle=180, x radius=1cm, y radius=0.4cm];
+	\draw[thick] (-1,0)
+	   arc[start angle=180, end angle=360, x radius=1cm, y radius=0.4cm];
+
+	% --- Axes S1, S2, S3 ---
+	\draw[gray, dotted] (0,0,0) --++ (0,0,1);
+	\draw[gray, dotted] (0,0,0) --++ (1,0,0);
+	\draw[gray, dotted] (0,0,0) --++ (0,1,0);
+
+	\draw[thick, ->] (0,0,1) --++ (0,0,0.2) node[below left]  {$S_1$};
+	\draw[thick, ->] (1,0,0) --++ (0.3,0,0) node[right]       {$S_2$};
+	\draw[thick, ->] (0,1,0) --++ (0,0.3,0) node[above left]  {$S_3$};
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%   État de polarisation (original)
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% S2 == x, 	S3 == y, 	S1 == z
+	% 2theta == theta, 	2chi == phi
+	\pgfmathsetmacro{\Theta}{65} 
+	\pgfmathsetmacro{\phi}{34}   
+	\pgfmathsetmacro{\x}{cos(\phi)*sin(\Theta)}
+	\pgfmathsetmacro{\y}{sin(\phi)*sin(\Theta)}
+	\pgfmathsetmacro{\z}{cos(\Theta)}
+
+	\draw[thick,dashed, ->, orange] (0,0,0) -- (\x,\y,\z);
+	\draw[dashed,orange] (0,0,0) -- (\x,0,\z);
+	\draw[->,orange] (\x,0,\z) arc (0:27:1) node[midway, left] {$\bm{2\chi}$};
+	\draw[<-,orange] (0.5*\x,0,0.5*\z) arc[start angle=0, end angle=-85,
+		    x radius=0.55, y radius=0.125] node[xshift = -.65cm] {$\bm{2\theta = \Blue{\xi}}$};
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%   Tropique (parallèle nord) - Ajout
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\pgfmathsetmacro{\TropiqueAngle}{30} % Angle du tropique depuis S1 (z)
+	\pgfmathsetmacro{\TropiqueRadius}{sin(\TropiqueAngle)} % Rayon projeté
+	\pgfmathsetmacro{\TropiqueHeight}{cos(\TropiqueAngle)} % Hauteur sur S1
+
+	\draw[thick, dashed, blue] (0.848,0.5)
+	   arc[start angle=0, end angle=180, x radius=0.85cm, y radius=0.23cm];
+	\draw[ultra thick, blue] (0.848,0.5)
+	   arc[start angle=0, end angle=-180, x radius=0.85cm, y radius=0.23cm];
+       
+\end{tikzpicture}
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\SpherePoincareXi}[3]{%
+  \begin{tikzpicture}[
+    shift={(#1,#2)},
+    scale=#3,
+    line cap=round,
+    line join=round
+  ]
+
+% Paramètres de l'état
+\def\Theta{65}
+\def\phi{34}
+\pgfmathsetmacro{\x}{cos(\phi)*sin(\Theta)}
+\pgfmathsetmacro{\y}{sin(\phi)*sin(\Theta)}
+\pgfmathsetmacro{\z}{cos(\Theta)}
+
+% Sphère de Poincaré 3D
+\draw[thick] (1,0,0) arc (0:360:1);
+\draw[dashed,gray] (1,0,0) arc (0:180:1 and 0.4);
+\draw[thick] (-1,0,0) arc (180:360:1 and 0.4);
+
+% Axes 3D
+
+\draw[gray, dotted] (0,0,0) --++ (0,0,1);
+\draw[gray, dotted] (0,0,0) --++ (1,0,0);
+\draw[gray, dotted] (0,0,0) --++ (0,1,0);
+
+\draw[thick, ->] (0,0,1) --++ (0,0,0.2) node[below left]  {$S_1$};
+\draw[thick, ->] (1,0,0) --++ (0.3,0,0) node[right]       {$S_2$};
+\draw[thick, ->] (0,1,0) --++ (0,0.3,0) node[above left]  {$S_3$};
+
+% Vecteur d'axe (avec votre décalage original)
+\draw[orange,->,dashed] (0,0,0) -- (\x+0.08,\y+0.24,\z);
+\draw[dashed,orange] (0,0,0) -- (\x,0,\z);
+\draw[orange,->,thick] (\x+0.08,\y+0.24,\z) --++ (0.2,0.2,0) node[above right] {$\vecu_\vecS$};
+\draw[->,orange,thick] (\x,0,\z) arc (0:32:1) node[midway, below left] {$2\chi$};
+\draw[<-,orange] (0.5*\x,0,0.5*\z) arc[start angle=0, end angle=-85,
+	    x radius=0.55, y radius=0.125] node[xshift = -.65cm] {$2\theta \neq \Blue{\xi}$};
+
+\draw[blue, ultra thick,rotate around={45:(\x/2,\y/2,\z/2)}] (0.9*\x+0.015,0.8*\y+0.8,0.9*\z) arc (90:270:0.2 and 0.8);
+\draw[blue,thick,dashed, rotate around={45:(\x/2,\y/2,\z/2)}] (0.9*\x+0.015,0.8*\y+0.8,0.9*\z) arc (90:-270:0.2 and 0.8);
+
+\draw[dotted,thick,blue] (\x-0.22,\y,\z) --++ (-0.1,0.45,0);
+\draw[dotted,thick,blue] (\x-0.22,\y,\z) --++ (-0.55,0.6,0);
+\draw[->,blue,thick] (\x-0.22-0.078,\y+0.35,\z) arc (0:140:0.15 and 0.07)
+node[midway,below]{$\bm{\xi}$};
+
+    
+\end{tikzpicture}
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\SpherePoincareVsop}[3]{%
+\begin{tikzpicture}[
+shift={(#1,#2)},
+scale=#3,
+line cap=round,
+line join=round
+]
+
+% --- Cercle extérieur (équateur) ---
+\draw[thick] (1,0) arc[start angle=0, end angle=360, radius=1];
+
+% --- Ellipse (arrière pointillé + avant plein) ---
+\draw[dashed,gray] (1,0)
+   arc[start angle=0, end angle=180, x radius=1cm, y radius=0.4cm];
+\draw[thick] (-1,0)
+   arc[start angle=180, end angle=360, x radius=1cm, y radius=0.4cm];
+
+% --- Axes S1, S2, S3 ---
+\draw[gray, dotted] (0,0,0) --++ (0,0,1);
+\draw[gray, dotted] (0,0,0) --++ (1,0,0);
+\draw[gray, dotted] (0,0,0) --++ (0,1,0);
+
+\draw[thick, ->] (0,0,1) --++ (0,0,0.2) node[below left]  {$S_1$};
+\draw[thick, ->] (1,0,0) --++ (0.3,0,0) node[right]       {$S_2$};
+\draw[thick, ->] (0,1,0) --++ (0,0.3,0) node[above left]  {$S_3$};
+
+\pgfmathsetmacro{\ThetaA}{75} 
+\pgfmathsetmacro{\phiA}{34}   
+\pgfmathsetmacro{\xA}{cos(\phiA)*sin(\ThetaA)}
+\pgfmathsetmacro{\yA}{sin(\phiA)*sin(\ThetaA)}
+\pgfmathsetmacro{\zA}{cos(\ThetaA)}
+
+\pgfmathsetmacro{\ThetaB}{85} 
+\pgfmathsetmacro{\phiB}{80}   
+\pgfmathsetmacro{\xB}{cos(\phiB)*sin(\ThetaB)}
+\pgfmathsetmacro{\yB}{sin(\phiB)*sin(\ThetaB)}
+\pgfmathsetmacro{\zB}{cos(\ThetaB)}
+
+\pgfmathsetmacro{\ThetaC}{80} 
+\pgfmathsetmacro{\phiC}{57}   
+\pgfmathsetmacro{\xC}{cos(\phiC)*sin(\ThetaC)}
+\pgfmathsetmacro{\yC}{sin(\phiC)*sin(\ThetaC)}
+\pgfmathsetmacro{\zC}{cos(\ThetaC)}
+
+\draw[thick, dashed, ->, orange] (0,0,0)node[below]{\textcolor{black}{$O$}} -- (\xA,\yA,\zA) node[midway, right = 3pt]{$\vecS_t$};
+\draw[thick, dashed, ->, blue] (0,0,0) -- (\xB,\yB,\zB) node[midway, left]{$\vecS_{t+dt}$};
+\draw[<->,thick] (\xA,\yA,\zA) -- (\xB,\yB,\zB) node[sloped, midway, below = 1pt]{$||\Delta \vecS_t||$};
+
+\draw[<->, thick] (\xA+0.08,\yA+0.08,\zA+0.08) arc (0:90:0.52) node[midway, above right] {$\Delta\alpha_t$};
+\end{tikzpicture}
+}
+

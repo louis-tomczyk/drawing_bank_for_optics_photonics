@@ -1,0 +1,20 @@
+\begin{tikzpicture}[scale = 1.5]
+    \draw (0,1)   rectangle (4.5,1.5) node[midway]{trame 1};
+    \draw (0,0)   rectangle (1.5,1)   node[midway]{\small paquet 1};
+    \draw (1.5,0) rectangle (3,1)     node[midway]{$\cdots$};
+    \draw (3,0)   rectangle (4.5,1)   node[midway]{\small paquet $N_b$};
+
+    \draw (5.25,0.5) node{$\cdots$};
+
+    \draw (6,1)   rectangle (10.5,1.5)node[midway]{trame $N_f$};
+    \draw (6,0)   rectangle (7.5,1)   node[midway]{\small paquet 1};
+    \draw (7.5,0) rectangle (9,1)     node[midway]{$\cdots$};
+    \draw (9,0)   rectangle (10.5,1)  node[midway]{\small paquet $N_b$};
+
+    \draw[<->] (0,-0.25) --++ (1.5,0) node[midway,below]{$N_{Sb/b}$};
+%        \draw[<->] (9,-0.25) --++ (1.5,0) node[midway,below]{$dt_{EDP}$};
+    \draw[<->] (0,-1)    --++ (4.5,0) node[midway,below]{$N_{Sb/f}$};%$=N_{S/l}\cdot N_{l/p}$};
+%        \draw[<->] (6,-1)    --++ (4.5,0) node[midway,below]{$\Delta t_{EDP}$};
+%        \draw[<->] (0,-1.75) --++ (10.5,0)node[midway,below]{$N_S\equiv T_{EDP}$};
+\end{tikzpicture}
+

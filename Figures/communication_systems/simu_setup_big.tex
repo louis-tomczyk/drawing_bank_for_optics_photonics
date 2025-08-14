@@ -1,0 +1,48 @@
+\begin{tikzpicture}[node distance=0.4cm and 0.8cm]
+
+% TX side
+\node[block]                    (symbol) {symbol mapping};
+\node[block, below=of symbol]   (pilot) {\Large $\substack{\text{pilot insertion}\\ \text{if CMA+PA-CPR}}$};
+\node[block, below=of pilot]    (pulse) {pulse shaping};
+\node[block, below=of pulse]    (phase) {phase rotation};
+
+\draw[arrow] (symbol) -- (pilot);
+\draw[arrow] (pilot) -- (pulse);
+\draw[arrow] (pulse) -- (phase);
+
+% Optical link elements
+
+\node[block, right= of pilot, xshift = -0.2cm, yshift = -0.75cm]   (scrambler) {\Large $\substack{\text{polarisation}\\ \text{scrambler}}$};
+\node[block, right= of scrambler]   (noise) {AWGCN};
+
+\draw[arrow] (scrambler) -- (noise);
+\draw[arrow, rounded corners = 3pt] (phase.east) -- ++(0.4,0) -- ++(0,1.1) -- (scrambler.west);
+
+% RX side
+\node[block, right=6cm of symbol, yshift = 0.75cm] (CohDet) {Coh Det};
+\node[block, below=of CohDet, xshift=-1cm] (cma) {CMA};
+\node[block, below=of cma] (pacpr) {PA-CPR};
+\node[block, below=of pacpr] (pilot_rem) {\Large $\substack{\text{pilot}\\ \text{removal}}$};
+
+\node[block, right=of cma, xshift = -0.25cm] (vae) {VAE-FIR};
+
+\node[block, below=of CohDet, yshift = -2.75cm] (ber) {\Large $\substack{\text{BER}\\ \text{assessment}}$};
+
+\draw[arrow] (cma) -- (pacpr);
+\draw[arrow] (pacpr) -- (pilot_rem);
+\draw[arrow, rounded corners = 3pt] (noise.east) -- ++(0.25,0) -- ++(0,2.5) -- (CohDet.west);
+
+\draw[arrow, rounded corners = 3pt] (CohDet.south) -- ++(0,-0.1) -- ++(-1,0) -- (cma.north);
+\draw[arrow, rounded corners = 3pt] (CohDet.south) -- ++(0,-0.1) -- ++(0.85,0) -- (vae.north);
+\draw[arrow, rounded corners = 3pt] (vae.south) -- ++(0,-2.08) -- ++(-0.85,0) -- (ber.north);
+
+\draw[arrow, rounded corners = 3pt] (pilot_rem.south) -- ++(0,-0.15) -- ++(1,0) -- (ber.north);
+
+
+
+\node[dspbox=(symbol)(phase), label=below:{transmitter DSP}] (tx_box) {};
+\node[dspbox=(scrambler)(noise), label=below:{optical link}] (opt_box) {};
+\node[dspbox=(cma)(ber)(vae), label=below:{receiver DSP}] (rx_box) {};
+
+
+\end{tikzpicture}

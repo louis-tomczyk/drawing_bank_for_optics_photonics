@@ -1,0 +1,170 @@
+% ------------------------------------------------------------------------------
+% ----- INFORMATIONS -----
+%   Author          : louis tomczyk
+%   Institution     : Telecom Paris
+%   Email           : louis.tomczyk@telecom-paris.fr
+%   Arxivs          : 2024-02-11
+%   Date            : 2024-12-27 [NEW] drawPSKconstellation
+%   Version         : 1.1.0
+%   License         : cc-by-nc-sa
+%                       CAN:    modify - distribute
+%                       CANNOT: commercial use
+%                       MUST:   share alike - include license
+% ------------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONSTELLATIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\constAx}[3]% #1 : abscisse, #2 ordonnée, #3 radius
+{
+    \draw[->] (#1-#3,#2) --++ (2*#3,0);% node[right]{$\Re$};
+    \draw[->] (#1,#2-#3) --++ (0,2*#3);% node[above]{$\Im$};
+}
+
+\newcommand{\constBPSK}[5]% #1 : abscisse, #2 ordonnée, #3 radius.sqrt(2), #4 radius point, #5 color fill
+{
+    \constAx{#1}{#2}{#3}
+    \draw[color = #5, fill = #5] (#1-#3/2,#2) circle(#4);
+    \draw[color = #5, fill = #5] (#1+#3/2,#2) circle(#4);
+}
+
+\newcommand{\constQPSK}[5]% #1 : abscisse, #2 ordonnée, #3 radius.sqrt(2), #4 radius point, #5 color fill
+{
+    \constAx{#1}{#2}{#3}
+    \draw[color = #5, fill = #5] (#1-#3/2,#2+#3/2) circle(#4);
+    \draw[color = #5, fill = #5] (#1+#3/2,#2+#3/2) circle(#4);
+    \draw[color = #5, fill = #5] (#1-#3/2,#2-#3/2) circle(#4);
+    \draw[color = #5, fill = #5] (#1+#3/2,#2-#3/2) circle(#4);
+}
+
+
+\newcommand{\constQPSKrot}[6]% #1 : abscisse, #2 ordonnée, #3 radius.sqrt(2),
+                               % #4 radius point, #5 couleur, #6 angle
+{
+    \constAx{#1}{#2}{#3}
+    \begin{scope}[rotate around = {#6:(#1,#2)}]
+        \draw[color = #5, fill = #5] (#1-#3/2+#3/4,#2-#3/2-#3/4) circle(#4);
+        \draw[color = #5, fill = #5] (#1+#3/2+#3/4,#2-#3/2+#3/4) circle(#4);
+        \draw[color = #5, fill = #5] (#1+#3/2-#3/4,#2+#3/2+#3/4) circle(#4);
+        \draw[color = #5, fill = #5] (#1-#3/2-#3/4,#2+#3/2-#3/4) circle(#4);
+    \end{scope}
+}
+
+
+\newcommand{\constNOISE}[8]% #1 : abscisse, #2 ordonnée, #3 radius.sqrt(2), #4 radius point, #5 color fill
+{
+    \constAx{#1}{#2}{#3}
+    \draw[color = #8, fill = #8] (#1+#4,#2+#5) ellipse(#6 and #7);
+}
+
+
+\newcommand{\drawPSKConstellation}[4]{% #1 order of PSK, #2 scale, #3 absissa, #4 ordonnée
+
+        \draw[->, thick] (#3*#2-1.5*#2,#4*#2) -- (#3*#2+1.5*#2,#4*#2) node[right] {$I$};
+        \draw[->, thick] (#3*#2,#4*#2-1.5*#2) -- (#3*#2,#4*#2+1.5*#2) node[above] {$Q$};
+
+        \draw[dashed, lightgray] (#3*#2,#4*#2) circle (1*#2);
+
+        \foreach \i in {1,...,#1}
+        {
+            \coordinate (S) at ({#3*#2+cos(360/#1*(0.5+\i))*#2}, {#4*#2+sin(360/#1*(0.5+\i))*#2});
+            \filldraw[blue] (S) circle (0.1*#2);
+        }
+
+}
+
+
+
+\newcommand{\drawQAMConstellation}[4]{%% #1 order of PSK, #2 scale, #3 absissa, #4 ordonnée
+   \pgfmathsetmacro{\Mm}{int(sqrt(#1)/2)}
+   \pgfmathsetmacro{\MM}{int(sqrt(#1)/2-1)}
+   
+    \draw[dashed,gray] (#3*#2,#4*#2) circle(0.7*#2);
+    \ifnum #1=16
+        \draw[dashed, lightgray] (#3*#2,#4*#2) circle(1.6*#2);
+        \draw[dashed, lightgray] (#3*#2,#4*#2) circle(2.1*#2);
+    \fi
+    \ifnum #1 = 64
+        \draw[dashed, lightgray] (#3*#2,#4*#2) circle(1.6*#2);
+        \draw[dashed, lightgray] (#3*#2,#4*#2) circle(2.1*#2);
+        \draw[dashed, lightgray] (#3*#2,#4*#2) circle(2.55*#2);
+        \draw[dashed, lightgray] (#3*#2,#4*#2) circle(2.9*#2);
+        \draw[dashed, lightgray] (#3*#2,#4*#2) circle(3.55*#2);
+        \draw[dashed, lightgray] (#3*#2,#4*#2) circle(3.8*#2);
+        \draw[dashed, lightgray] (#3*#2,#4*#2) circle(4.3*#2);
+        \draw[dashed, lightgray] (#3*#2,#4*#2) circle(4.95*#2);
+    \fi
+    
+    \draw[->, thick] (#3*#2-\Mm*#2,#4*#2) -- (#3*#2+\Mm*#2,#4*#2) node[right] {$I$};
+    \draw[->, thick] (#3*#2,#4*#2-\Mm*#2) -- (#3*#2,#4*#2+\Mm*#2) node[above] {$Q$};
+    \foreach \i in {-\Mm,...,\MM}
+    {
+        \foreach \j in {-\Mm,...,\MM}
+        {
+            \coordinate (S) at ({#3*#2+0.5*#2+\i*#2}, {#4*#2+0.5*#2+\j*#2});
+            \filldraw[blue] (S) circle (0.1);
+        }
+    }
+}
+
+\newcommand{\drawQAMConstellationRot}[8]{%% #1 ordre du QAM, #2 échelle, #3 abscisse, #4 ordonnée, #5 angle de rotation, #6 size of points, #7 color
+    \pgfmathsetmacro{\Mm}{int(sqrt(#1)/2)}
+    \pgfmathsetmacro{\MM}{int(sqrt(#1)/2-1)}
+
+    \pgfmathsetmacro{\xc}{#3*#2}
+    \pgfmathsetmacro{\yc}{#4*#2}
+
+    \ifnum #8 = 1
+        \draw[dashed,gray] (#3*#2,#4*#2) circle(0.7*#2);
+        \ifnum #1=16
+            \draw[dashed, lightgray] (#3*#2,#4*#2) circle(1.6*#2);
+            \draw[dashed, lightgray] (#3*#2,#4*#2) circle(2.1*#2);
+        \fi
+        \ifnum #1 = 64
+            \draw[dashed, lightgray] (#3*#2,#4*#2) circle(1.6*#2);
+            \draw[dashed, lightgray] (#3*#2,#4*#2) circle(2.1*#2);
+            \draw[dashed, lightgray] (#3*#2,#4*#2) circle(2.55*#2);
+            \draw[dashed, lightgray] (#3*#2,#4*#2) circle(2.9*#2);
+            \draw[dashed, lightgray] (#3*#2,#4*#2) circle(3.55*#2);
+            \draw[dashed, lightgray] (#3*#2,#4*#2) circle(3.8*#2);
+            \draw[dashed, lightgray] (#3*#2,#4*#2) circle(4.3*#2);
+            \draw[dashed, lightgray] (#3*#2,#4*#2) circle(4.95*#2);
+        \fi
+    \fi
+
+    \ifnum #8 = 2
+        \ifnum #1 = 16
+            \foreach \j in {-2,...,2} {
+                \draw[gray, dashed] (\j*#2+#3*#2, -2*#2+#4*#2) --++ (0,4*#2);
+            }
+            \foreach \j in {-2,...,2} {
+                \draw[gray, dashed] (-2*#2+#3*#2,\j*#2+#4*#2) --++ (4*#2,0);
+            }
+        \fi
+
+        \ifnum #1 = 64
+            \foreach \j in {-4,...,4} {
+                \draw[gray, dashed] (\j*#2+#3*#2, -4*#2+#4*#2) --++ (0,8*#2);
+            }
+            \foreach \j in {-4,...,4} {
+                \draw[gray, dashed] (-4*#2+#3*#2,\j*#2+#4*#2) --++ (8*#2,0);
+            }
+        \fi
+    \fi
+    
+    \draw[->, thick] (#3*#2-\Mm*#2,#4*#2) -- (#3*#2+\Mm*#2,#4*#2) node[right] {$I$};
+    \draw[->, thick] (#3*#2,#4*#2-\Mm*#2) -- (#3*#2,#4*#2+\Mm*#2) node[above] {$Q$};
+
+    \foreach \i in {-\Mm,...,\MM} {
+        \foreach \j in {-\Mm,...,\MM} {
+            \pgfmathsetmacro{\x}{#3*#2 + 0.5*#2 + \i*#2}
+            \pgfmathsetmacro{\y}{#4*#2 + 0.5*#2 + \j*#2}
+
+            \pgfmathsetmacro{\xr}{cos(#5)*(\x-\xc) - sin(#5)*(\y-\yc) + \xc}
+            \pgfmathsetmacro{\yr}{sin(#5)*(\x-\xc) + cos(#5)*(\y-\yc) + \yc}
+
+            \filldraw[#7] (\xr, \yr) circle (#6);
+        }
+    }
+}

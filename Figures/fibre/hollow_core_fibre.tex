@@ -1,0 +1,67 @@
+\begin{tikzpicture}[>=stealth]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1) Gaine extérieure
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw[fill=lightgray, draw=black, thick] (0,0) circle (3);
+% (On peut retirer le node initial « Gaine » si on utilise la flèche)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2) Zone photonic band-gap
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw[fill=lightgray!50!white, draw=black, thick] (0,0) circle (2);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3) Coeur creux au centre
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\draw[draw=black, very thick] (0,0) circle (1);
+\shade[inner color=blue, outer color=white] (0,0) circle (1);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 4) Trous pour la micro-structure
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\foreach \k in {0,...,25}{
+	\pgfmathsetmacro{\angle}{360/25 * \k}
+	\coordinate (hole\k) at ({1.75*cos(\angle)}, {1.75*sin(\angle)});
+	\draw[fill=white, draw=black] (hole\k) circle (0.07);
+}
+
+\foreach \k in {0,...,20}{
+	\pgfmathsetmacro{\angle}{360/20 * \k}
+	\coordinate (hole\k) at ({1.5*cos(\angle)}, {1.5*sin(\angle)});
+	\draw[fill=white, draw=black] (hole\k) circle (0.07);
+}
+
+\foreach \k in {0,...,15}{
+	\pgfmathsetmacro{\angle}{360/15 * \k}
+	\coordinate (hole\k) at ({1.25*cos(\angle)}, {1.25*sin(\angle)});
+	\draw[fill=white, draw=black] (hole\k) circle (0.07);
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 5) ANNOTATIONS (avec des flèches droites)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% (a) Gaine extérieure
+% On vise le grand cercle de rayon 3. 
+\draw[<-, thick]
+	(2.2,2) -- (4,2) % Ajuste pour pointer sur le bord
+	node[midway, above right = 0.1cm and 0.25cm]
+	{Gaine extérieure};
+
+% (c) Coeur creux
+% On vise le cercle central de rayon 1
+\draw[->, thick]
+	(0, -3.5) -- (0, -1)
+	node[xshift = -1cm, yshift = -2.25cm]
+	{Coeur creux};
+
+% (d) Micro-structure (les trous)
+% On pointe par exemple vers un trou situé sur l'axe x>0
+\draw[->, thick]
+	(3.2, -1.5) -- (1.75, 0)
+	node[xshift = 2.5cm, yshift = -2cm]
+	{Micro-structure};
+
+\end{tikzpicture}
+

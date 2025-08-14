@@ -1,0 +1,79 @@
+\begin{tikzpicture}
+\myboxopaque{3}{-11}{11.75}{7.75}{redTelecom}{redTelecom!25!white}
+\myboxopaque{2.5}{-10.75}{11.75}{7.75}{redTelecom}{redTelecom!25!white}
+
+    \draw (8.25,-5) node{ $\forall k\in\llbracket 1,N\sub{slices}N\sub{spans}\rrbracket$};
+    \draw (13.75,-10.5) node{ \textcolor{redTelecom}{$H$}};
+    \draw (14.375,-10.75) node{ \textcolor{redTelecom}{$V$}};
+    \boxvalue{0}{0}{ CDC}{grayTelecom}
+    \boxvalue{0}{0}{ CDC}{cyan!75!blue}
+    \boxvalue{3}{0}{ MIMO}{grayTelecom}
+    \boxvalue{3}{0}{ MIMO}{cyan!50!blue}
+    \boxvalue{6}{0}{ CC}{grayTelecom}
+    \boxvaluelarger{9}{0}{ Decision}{grayTelecom}
+    \boxvalue{12.25}{0}{ FEC}{grayTelecom}
+
+    \linkright{-2.25}{0}{1.25}{$\calUtilde(L,\omega)$}{} % inputs
+    \linkright{-2.25}{0}{1.25}{$\calUtilde(L,\omega)$}{cyan!75!blue} % inputs
+    \linkright{1}{0}{1}{}{}                     % CDC   - MIMO
+    \linkright{1}{0}{1}{}{cyan!50!blue}                    % CDC   - MIMO
+    \linkright{4}{0}{1}{}{}                     % MIMO  - CC
+    \linkright{4}{0}{1}{}{cyan!50!blue}
+    \linkright{4.5}{0}{0.5}{}{}
+    \linkright{7}{0}{0.75}{}{}                     % CC    - Decision
+    \linkright{10.25}{0}{1}{}{}                    % Decision   - FEC
+    \linkright{13.25}{0}{1.25}{ 0101}{black}          % output DSP
+
+    \boxvalue{4.5}{-2}{ CD}{grayTelecom}
+    \boxvalue{4.5}{-2}{ CD}{cyan!50!blue}
+
+    \boxvalue{4.5}{-4}{ \textcolor{blue}{$\delta_k$CDC}}{blue}
+%    \boxvalue{4.5}{-4}{ \textcolor{blue}{$\delta_1$CDC}}{blue}
+%    \boxvalue{4.5}{-4}{ \textcolor{blue}{$\delta_2$CDC}}{blue}
+%    \boxvalue{4.5}{-4}{ \textcolor{blue}{$\delta_N$CD}}{blue}
+
+
+    \boxvalue{4.5}{-6}{ PNR}{gray}
+%    \boxvalue{4.5}{-6}{ PNR}{gray}
+%    \boxvalue{4.5}{-6}{ PNR}{gray}
+%    \boxvalue{4.5}{-6}{ PNR}{gray}
+    
+    \boxvalueLargeCustom{4.5}{-8}{\textcolor{redTelecom}{$(1-\delta_k)$CDC}}{redTelecom}{1.5}
+%    \boxvalueLargeCustom{4.5}{-8}{\textcolor{redTelecom}{$(1-\delta_1)$CDC}}{redTelecom}{1.5}
+%    \boxvalueLargeCustom{4.5}{-8}{\textcolor{redTelecom}{$(1-\delta_2)$CDC}}{redTelecom}{1.5}
+%    \boxvalueLargeCustom{4.5}{-8}{\textcolor{redTelecom}{$(1-\delta_N)$CDC}}{redTelecom}{1.5}
+    
+    
+    \linkdown{4.5}{0}{1.5}{}{black}        % MIMO - CD
+    
+    \linkdown{4.5}{0}{1.5}{}{cyan!50!blue}        % MIMO - CD
+    \linkdown{4.5}{-2.5}{1}{}{black}       % CD - dCD
+    \linkdown{4.5}{-4.5}{1}{}{black}       % dCD - PNR
+    \linkdown{4.5}{-6.5}{1}{}{black}       % PNR - (1-d)CD
+    \linkright{6}{-8}{0.5}{}{black}        % (1-d)CD - abs
+    \linkright{8}{-8}{0.5}{}{black}       % abs - corr
+    \linkright{11.5}{-8}{-0.5}{}{black}   % abs - corr (reversed)
+
+    \linkdown{9.75}{-8.5}{1}{}{black}      % corr - trunc
+    \linkdown{12.25}{-0.5}{4.5}{}{black}     % FEC - WR
+    \linkdown{12.25}{-6}{1.5}{}{black}     % Match Filter - abs
+
+	\linkdown{9.75}{-12.5}{0.5}{ $\calP$}{white}
+    \boxvalue{12.25}{-5.5}{ WR}{redTelecom}
+		\boxvaluelarger{9.75}{-8}{ $\rho(\bullet_1,\bullet_2)$}{redTelecom}
+		\boxvaluesmaller{7.25}{-8}{ $\vert\bullet\vert$}{redTelecom}
+		\boxvaluesmaller{12.25}{-8}{ $\vert\bullet\vert$}{redTelecom}                     % corr - trunc}
+    
+
+    \draw[->,thick] (9,-10.5) --++ (0,-1.75) node[left,midway]{ $\calP_H$} --++ (0.5,0);
+    \draw[->,thick] (10.5,-11) --++ (0,-1.25) node[right,midway]{ $\calP_V$} --++ (-0.5,0);
+    \linkdown{9.75}{-12.5}{0.5}{ $\calP$}{black}                     % corr - trunc
+    \comparator{9.75}{-12.25}{0.25}{black}
+    \boxvalueLargeCustom{9.75}{-10}{ trunc (if DPD)}{redTelecom}{1.5}
+    \boxvaluesmaller{7.25}{-8}{ $\vert\bullet\vert$}{redTelecom}
+    \boxvaluesmaller{12.25}{-8}{ $\vert\bullet\vert$}{redTelecom}
+	\boxvaluelarger{9.75}{-8}{ $\rho(\bullet_1,\bullet_2)$}{redTelecom}
+	\boxvalue{12.25}{-5.5}{ WR}{redTelecom}
+
+\end{tikzpicture}
+
